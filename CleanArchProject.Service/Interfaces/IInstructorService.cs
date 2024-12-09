@@ -22,5 +22,6 @@ namespace CleanArchProject.Service.Interfaces
         public IQueryable<Instructor> GetAllInstructorsQuerable();
         IQueryable<Instructor> GetFilteredInstructorsQuerable(enInstructorsOrderingEnum orderBy, string search);
         IQueryable<Instructor> GetInstructorsListBySupervisorIdQuerable(int id);
+        Task<bool> IsInstructorExists(int Id);
     }
 }

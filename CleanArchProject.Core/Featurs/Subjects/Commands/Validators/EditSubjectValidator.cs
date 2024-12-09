@@ -47,8 +47,11 @@ namespace CleanArchProject.Core.Featurs.Subject.Commands.Validators
         }
         public void ApplayCostumeValidationRules()
         {
-            RuleFor(s => s.SubjectArabicName).MustAsync(async (module, key, cancellationToken) => !await _subjectService.IsSubjectNameExistsById(module.SubjectName, module.SubjectArabicName, module.SubjectID))
-                .WithMessage("Department with the same Name is already exists");
+            RuleFor(s => s.SubjectArabicName).MustAsync(async (module, key, cancellationToken) => !await _subjectService.IsSubjectArabicNameExistsById(module.SubjectArabicName, module.SubjectID))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
+
+            RuleFor(s => s.SubjectName).MustAsync(async (module, key, cancellationToken) => !await _subjectService.IsSubjectNameExistsById(module.SubjectName, module.SubjectID))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
         }
         #endregion
     }

@@ -17,15 +17,19 @@ namespace CleanArchProject.Core.Featurs.Departments.Commands.Validators
     {
         #region Fields
         private readonly IDepartmentService _departmentService;
+        private readonly IInstructorService _instructorService;
         private readonly IStringLocalizer<SharedResources.SharedResources> _stringLocalizer;
         #endregion
 
         #region Constructor
         public AddDepartmentValidator(IDepartmentService departmentService,
-            IStringLocalizer<SharedResources.SharedResources> stringLocalizer)
+            IStringLocalizer<SharedResources.SharedResources> stringLocalizer,
+            IInstructorService instructorService)
         {
             _departmentService = departmentService;
             _stringLocalizer = stringLocalizer;
+            _instructorService = instructorService;
+
             ApplayValidationRules();
             ApplayCostumeValidationRules();
         }
@@ -49,8 +53,14 @@ namespace CleanArchProject.Core.Featurs.Departments.Commands.Validators
         }
         public void ApplayCostumeValidationRules()
         {
-            RuleFor(s => s.DepartmentArabicName).MustAsync(async (module,key, cancellationToken) => !await _departmentService.IsDepartmentNameExists(module.DepartmentName, module.DepartmentArabicName))
-                .WithMessage("Department with the same Name is already exists");
+            RuleFor(s => s.DepartmentName).MustAsync(async (module,key, cancellationToken) => !await _departmentService.IsDepartmentNameExists(module.DepartmentName))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
+            
+            RuleFor(s => s.DepartmentArabicName).MustAsync(async (module, key, cancellationToken) => !await _departmentService.IsDepartmentArabicNameExists(module.DepartmentArabicName))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
+
+            RuleFor(s => s.ManagerInstructorId).MustAsync(async (key, cancellationToken) => await _instructorService.IsInstructorExists(key))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
         }
         #endregion
     }

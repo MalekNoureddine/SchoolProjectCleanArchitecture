@@ -150,4 +150,16 @@
   <data name="GreaterThan0" xml:space="preserve">
     <value>Value should be greater than 0</value>
   </data>
+  <data name="DoseNotExists" xml:space="preserve">
+    <value>Dose not exist</value>
+  </data>
+  <data name="IsAlreadyExits" xml:space="preserve">
+    <value>Is already exists </value>
+  </data>
+  <data name="Dep" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="DepId" xml:space="preserve">
+    <value>DepartmentId</value>
+  </data>
 </root>

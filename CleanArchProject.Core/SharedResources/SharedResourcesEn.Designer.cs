@@ -88,11 +88,47 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Department.
+        /// </summary>
+        internal static string Dep {
+            get {
+                return ResourceManager.GetString("Dep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à DepartmentId.
+        /// </summary>
+        internal static string DepId {
+            get {
+                return ResourceManager.GetString("DepId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Dose not exist.
+        /// </summary>
+        internal static string DoseNotExists {
+            get {
+                return ResourceManager.GetString("DoseNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Value should be greater than 0.
         /// </summary>
         internal static string GreaterThan0 {
             get {
                 return ResourceManager.GetString("GreaterThan0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Is already exists .
+        /// </summary>
+        internal static string IsAlreadyExits {
+            get {
+                return ResourceManager.GetString("IsAlreadyExits", resourceCulture);
             }
         }
         

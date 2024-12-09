@@ -1,6 +1,7 @@
 ﻿using CleanArchProject.Core.Featurs.Students.Commands.Models;
 using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Service.Interfaces;
+using CleanArchProject.Service.ServicesImplementation;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using System;
@@ -16,18 +17,21 @@ namespace CleanArchProject.Core.Featurs.Students.Commands.Validators
 
         #region Fields
         private readonly IStudentService _studentService;
+        private readonly IDepartmentService _departmentService;
         private readonly IStringLocalizer<SharedResources.SharedResources> _stringLocalizer;
 
         #endregion
 
         #region Constructor
         public EditStudentValidator(IStudentService studentService,
-            IStringLocalizer<SharedResources.SharedResources> stringLocalizer)
+            IStringLocalizer<SharedResources.SharedResources> stringLocalizer,
+            IDepartmentService departmentService)
         {
             _studentService = studentService;
             _stringLocalizer = stringLocalizer;
             ApplayValidationRules();
             ApplayCostumeValidationRules();
+            _departmentService = departmentService;
         }
         #endregion
 
@@ -54,7 +58,12 @@ namespace CleanArchProject.Core.Featurs.Students.Commands.Validators
         {
             RuleFor(s => s.Phone).MustAsync(async (modle, key, cancellationToken) => !await _studentService.IsPhoneNumberExists(key,modle.Id))
                 .WithMessage("Student with the same phone number is already exists");
+
+
+            RuleFor(s => s.DepartmentId).MustAsync(async (key, cancellationToken) => await _departmentService.IsDepartmentExists(key))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.DoseNotExists]);
         }
+
         #endregion
     }
 }

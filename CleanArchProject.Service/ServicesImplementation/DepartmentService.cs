@@ -155,18 +155,39 @@ namespace CleanArchProject.Service.ServicesImplementation
             return result;
         }
 
-        public async Task<bool> IsDepartmentNameExists(string DepartmentName, string DepartmentArabicName)
+        public async Task<bool> IsDepartmentExists(int Id)
         {
-            var checkDepartmentName = await _departmentService.GetTableNoTracking().Where(s => s.DNameAr.Equals(DepartmentArabicName) || 
-            s.DName.Equals(DepartmentName)).FirstOrDefaultAsync();
+            return await _departmentService.GetTableNoTracking().AnyAsync(s => s.DID == Id);
+        }
+
+        public async Task<bool> IsDepartmentNameExists(string DepartmentName)
+        {
+            var checkDepartmentName = await _departmentService.GetTableNoTracking()
+                .Where(s =>  s.DName.Equals(DepartmentName)).FirstOrDefaultAsync();
             if (checkDepartmentName != null) return true;
             return false;
         }
 
-        public async Task<bool> IsDepartmentNameExists(string DepartmentName, string DepartmentArabicName, int Id)
+        public async Task<bool> IsDepartmentArabicNameExists(string DepartmentArabicName)
         {
-            var checkDepartmentName = await _departmentService.GetTableNoTracking().Where(s => (s.DNameAr.Equals(DepartmentArabicName) ||
-            s.DName.Equals(DepartmentName)) && s.DID != Id).FirstOrDefaultAsync();
+            var checkDepartmentName = await _departmentService.GetTableNoTracking()
+                .Where(s => s.DNameAr.Equals(DepartmentArabicName)).FirstOrDefaultAsync();
+            if (checkDepartmentName != null) return true;
+            return false;
+        }
+
+        public async Task<bool> IsDepartmentNameExistsById(string DepartmentName, int Id)
+        {
+            var checkDepartmentName = await _departmentService.GetTableNoTracking()
+                .Where(s => (s.DName.Equals(DepartmentName)) && s.DID != Id).FirstOrDefaultAsync();
+            if (checkDepartmentName != null) return true;
+            return false;
+        }
+
+        public async Task<bool> IsDepartmentArabicNameExistsById(string DepartmentArabicName, int Id)
+        {
+            var checkDepartmentName = await _departmentService.GetTableNoTracking()
+                .Where(s => (s.DNameAr.Equals(DepartmentArabicName)) && s.DID != Id).FirstOrDefaultAsync();
             if (checkDepartmentName != null) return true;
             return false;
         }

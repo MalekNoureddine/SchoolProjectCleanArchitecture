@@ -14,8 +14,11 @@ namespace CleanArchProject.Service.Interfaces
         public Task<Department> GetDepartmentByIdAsync(int id, bool includeEntities = false);
         public Task<string> AddDepartmentAsync(Department department);
         public Task<string> EditDepartmentAsync(Department department);
-        public Task<bool> IsDepartmentNameExists(string DepartmentName, string DepartmentArabicName);
-        public Task<bool> IsDepartmentNameExists(string DepartmentName, string DepartmentArabicName, int Id);
+        public Task<bool> IsDepartmentArabicNameExists(string DepartmentArabicName);
+        public Task<bool> IsDepartmentNameExists(string DepartmentName);
+        public Task<bool> IsDepartmentArabicNameExistsById(string DepartmentArabicName, int Id);
+        public Task<bool> IsDepartmentNameExistsById(string DepartmentName, int Id);
+        public Task<bool> IsDepartmentExists(int Id);
         Task<string> DeleteDepartmentAsync(Department department);
         public IQueryable<Department> GetAllDepartmentsQuerable();
         IQueryable<Department> GetFilteredDepartmentsQuerable(enDepartmentOrderingEnum orderBy, string search);

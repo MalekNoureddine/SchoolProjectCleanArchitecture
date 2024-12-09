@@ -1,6 +1,7 @@
 ﻿using CleanArchProject.Core.Featurs.Departments.Commands.Models;
 using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Service.Interfaces;
+using CleanArchProject.Service.ServicesImplementation;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using System;
@@ -16,14 +17,18 @@ namespace CleanArchProject.Core.Featurs.Departments.Commands.Validators
         #region Fields
         private readonly IDepartmentService _departmentService;
         private readonly IStringLocalizer<SharedResources.SharedResources> _stringLocalizer;
+        private readonly IInstructorService _instructorService;
         #endregion
 
         #region Constructor
         public EditDepartmentValidator(IDepartmentService departmentService,
-            IStringLocalizer<SharedResources.SharedResources> stringLocalizer)
+            IStringLocalizer<SharedResources.SharedResources> stringLocalizer,
+            IInstructorService instructorService)
         {
             _departmentService = departmentService;
             _stringLocalizer = stringLocalizer;
+            _instructorService = instructorService;
+
             ApplayValidationRules();
             ApplayCostumeValidationRules();
         }
@@ -51,8 +56,14 @@ namespace CleanArchProject.Core.Featurs.Departments.Commands.Validators
         }
         public void ApplayCostumeValidationRules()
         {
-            RuleFor(s => s.DepartmentArabicName).MustAsync(async (module, key, cancellationToken) => !await _departmentService.IsDepartmentNameExists(module.DepartmentName, module.DepartmentArabicName, module.DepartmentId))
-                .WithMessage("Department with the same Name is already exists");
+            RuleFor(s => s.DepartmentArabicName).MustAsync(async (module, key, cancellationToken) => !await _departmentService.IsDepartmentNameExistsById(module.DepartmentName, module.DepartmentId))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
+
+            RuleFor(s => s.DepartmentName).MustAsync(async (module, key, cancellationToken) => !await _departmentService.IsDepartmentArabicNameExistsById(module.DepartmentArabicName, module.DepartmentId))
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
+
+            RuleFor(s => s.ManagerInstructorId).MustAsync(async (key, cancellationToken) => await _instructorService.IsInstructorExists(key))
+            .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
         }
         #endregion
     }

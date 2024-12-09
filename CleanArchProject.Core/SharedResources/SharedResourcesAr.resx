@@ -171,4 +171,10 @@
   <data name="DepartmentId" xml:space="preserve">
     <value>الرقم التعريفي للقسم</value>
   </data>
+  <data name="DoseNotExists" xml:space="preserve">
+    <value>غير موجود</value>
+  </data>
+  <data name="IsAlreadyExits" xml:space="preserve">
+    <value>موجود بالفعل</value>
+  </data>
 </root>

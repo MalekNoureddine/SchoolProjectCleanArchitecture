@@ -197,6 +197,11 @@ namespace CleanArchProject.Service.ServicesImplementation
             if (checkInstructorPhone_and_Email != null) return true;
             return false;
         }
+
+        public async Task<bool> IsInstructorExists(int Id)
+        {
+            return await _instructorService.GetTableNoTracking().AnyAsync(i => i.InsId == Id);
+        }
         #endregion
 
     }

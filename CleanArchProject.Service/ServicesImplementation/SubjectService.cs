@@ -143,22 +143,32 @@ namespace CleanArchProject.Service.ServicesImplementation
             return subject;
         }
 
-        public async Task<bool> IsSubjectNameExists(string subjectName, string subjectArabicName)
+        public async Task<bool> IsSubjectArabicNameExists(string subjectArabicName)
         {
-            var checkDepartmentName = await _subjectService.GetTableNoTracking().Where(s => s.SubjectName.Equals(subjectName) ||
-            s.SubjectNameAr.Equals(subjectArabicName)).FirstOrDefaultAsync();
+            var checkDepartmentName = await _subjectService.GetTableNoTracking().Where(s => s.SubjectNameAr.Equals(subjectArabicName)).FirstOrDefaultAsync();
+            if (checkDepartmentName != null) return true;
+            return false;
+        }
+        public async Task<bool> IsSubjectNameExists(string subjectName)
+        {
+            var checkDepartmentName = await _subjectService.GetTableNoTracking().Where(s => s.SubjectName.Equals(subjectName)).FirstOrDefaultAsync();
             if (checkDepartmentName != null) return true;
             return false;
         }
 
-        public async Task<bool> IsSubjectNameExistsById(string subjectName, string subjectArabicName, int Id)
+        public async Task<bool> IsSubjectNameExistsById(string subjectName, int Id)
         {
-            var checkDepartmentName = await _subjectService.GetTableNoTracking().Where(s => (s.SubjectName.Equals(subjectName) ||
-            s.SubjectNameAr.Equals(subjectArabicName)) && s.SubID != Id).FirstOrDefaultAsync();
+            var checkDepartmentName = await _subjectService.GetTableNoTracking().Where(s => (s.SubjectName.Equals(subjectName)) && s.SubID != Id).FirstOrDefaultAsync();
             if (checkDepartmentName != null) return true;
             return false;
         }
 
+        public async Task<bool> IsSubjectArabicNameExistsById(string subjectArabicName, int Id)
+        {
+            var checkDepartmentName = await _subjectService.GetTableNoTracking().Where(s => (s.SubjectNameAr.Equals(subjectArabicName)) && s.SubID != Id).FirstOrDefaultAsync();
+            if (checkDepartmentName != null) return true;
+            return false;
+        }
         #endregion
 
     }

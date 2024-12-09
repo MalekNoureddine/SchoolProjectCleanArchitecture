@@ -20,6 +20,7 @@ namespace CleanArchProject.Core.SharedResources
 
         public const string NotEmpty = "NotEmpty";
         public const string NotNull = "NotNull";
+        public const string NotValid = "NotValid";
         public const string GreaterThan0 = "GreaterThan0";
 
         public const string Student = "Student";
@@ -29,6 +30,8 @@ namespace CleanArchProject.Core.SharedResources
         public const string Id = "Id";
         public const string StudentId = Student + Id;
         public const string DepartmentId = Department + Id;
+        public const string DoseNotExists = "DoseNotExists";
+        public const string IsAlreadyExits = "IsAlreadyExits";
     }
     
 }

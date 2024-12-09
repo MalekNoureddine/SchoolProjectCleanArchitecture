@@ -106,6 +106,15 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à غير موجود.
+        /// </summary>
+        internal static string DoseNotExists {
+            get {
+                return ResourceManager.GetString("DoseNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à يجب ان يكون اكبر من الصفر.
         /// </summary>
         internal static string GreaterThan0 {
@@ -120,6 +129,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string Id {
             get {
                 return ResourceManager.GetString("Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à موجود بالفعل.
+        /// </summary>
+        internal static string IsAlreadyExits {
+            get {
+                return ResourceManager.GetString("IsAlreadyExits", resourceCulture);
             }
         }
         

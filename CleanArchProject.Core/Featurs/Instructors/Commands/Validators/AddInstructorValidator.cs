@@ -51,9 +51,12 @@ namespace CleanArchProject.Core.Featurs.Instructors.Commands.Validators
         public void ApplayCostumeValidationRules()
         {
             RuleFor(s => s.Email).MustAsync(async (module, key, cancellationToken) => !await _instructorService.IsInstructorEmailExists(module.Email))
-                .WithMessage("Instructor with the same email is already exists");
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
             RuleFor(s => s.Phone).MustAsync(async (module, key, cancellationToken) => !await _instructorService.IsInstructorPhoneExists(module.Phone))
-            .WithMessage("Instructor with the same phone is already exists");
+            .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
+
+            RuleFor(s => s.SupervisorId).MustAsync(async (key, cancellationToken) => await _instructorService.IsInstructorExists(key??-1))
+            .WithMessage(_stringLocalizer[SharedResourcesKeys.DoseNotExists]);
         }
         #endregion
 
