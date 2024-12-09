@@ -17,6 +17,7 @@ namespace CleanArchProject.Core.Mapping.Students
             GetAStudentMapping();
             AddStudentMapping();
             EditStudentMapping();
+            GetPaginatedStudentsListMapping();
         }
     }
 }

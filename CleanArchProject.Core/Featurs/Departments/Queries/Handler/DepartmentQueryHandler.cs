@@ -51,7 +51,7 @@ namespace CleanArchProject.Core.Featurs.Departments.Queries.Handler
 
             var studentquery = _student.GetAllStudentsByDepartmentQuerable(request.Id);
             int NumberOfStudents = studentquery.Count();
-            var paginatedList = await studentquery.Select(expression).ToPaginatedListAsync(request.PageNumber, request.PageSize);
+            var paginatedList = await studentquery.Select(expression).ToPaginatedListAsync(request.StudentsPageNumber, request.StudentsPageSize);
             departmentmapper.StudentList = paginatedList;
 
             var result = Success(departmentmapper);

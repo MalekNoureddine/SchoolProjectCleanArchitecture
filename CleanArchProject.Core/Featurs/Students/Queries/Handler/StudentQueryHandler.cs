@@ -5,6 +5,7 @@ using CleanArchProject.Core.Featurs.Students.Queries.Response;
 using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Data.Entities;
 using CleanArchProject.Service.Interfaces;
+using CleanArchProject.Service.ServicesImplementation;
 using MediatR;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Wrappers;
@@ -57,12 +58,9 @@ namespace CleanArchProject.Core.Featurs.Students.Queries.Handler
 
         public async Task<PaginatedResult<GetStudentsListPagiatedResponse>> Handle(GetStudentsListPaginatedQuery request, CancellationToken cancellationToken)
         {
-            Expression<Func<Student, GetStudentsListPagiatedResponse>> expression = e =>
-            new GetStudentsListPagiatedResponse(e.StudID, e.GetLocalized(e.Name,e.NameAr), e.Address, e.Phone, e.GetLocalized(e.Department.DName, e.Department.DNameAr));
+            var FilterQuery = _student.GetFilteredStudentsQuerable(request.OrderBy, request.Search);
+            var paginatedList = await _mapper.ProjectTo<GetStudentsListPagiatedResponse>(FilterQuery).ToPaginatedListAsync(request.StudentPageNumber, request.StudentPageSize);
 
-            //var querable = _student.GetAllStudentsQuerable();
-            var FilteredQuerable = _student.GetFilteredStudentsQuerable(request.OrderBy, request.Search);
-            var paginatedList = await FilteredQuerable.Select(expression).ToPaginatedListAsync(request.StudentPageNumber, request.StudentPageSize);
             paginatedList.Meta = new {Count = paginatedList.Data.Count};
             return paginatedList;
         }
