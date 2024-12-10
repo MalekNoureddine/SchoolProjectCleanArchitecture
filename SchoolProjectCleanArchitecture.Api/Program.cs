@@ -18,11 +18,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen().AddCoreDependencies();
 
-//Connection SQL
-builder.Services.AddDbContext<AppDbContext>(option =>
-{
-    option.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
-});
+////Connection SQL
+//builder.Services.AddDbContext<AppDbContext>(option =>
+//{
+//    option.UseSqlServer(builder.Configuration.GetConnectionString("dbcontext"));
+//});
 
 #region Localization
     builder.Services.AddControllersWithViews();
@@ -52,7 +52,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 #region Dependency injection
 
 builder.Services.AddInfrastractureDependencies()
-    .AddServiceDependencies().AddCoreDependencies();
+    .AddServiceDependencies().AddCoreDependencies().AddServiceRegistration(builder.Configuration);
 
 #endregion
 

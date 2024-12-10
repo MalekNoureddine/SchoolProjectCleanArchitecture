@@ -1,5 +1,4 @@
-﻿using Azure;
-using CleanArchProject.Data.Entities;
+﻿using CleanArchProject.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
