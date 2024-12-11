@@ -32,6 +32,9 @@ namespace CleanArchProject.Core.SharedResources
         public const string DepartmentId = Department + Id;
         public const string DoseNotExists = "DoseNotExists";
         public const string IsAlreadyExits = "IsAlreadyExits";
+        public const string MaxLengthis100 = "MaxLengthis100";
+        public const string PasswordNotEqualConfirmPass = "PasswordNotEqualConfirmPass";
+        public const string FaildToAddUser = "FaildToAddUser";
     }
     
 }

@@ -162,4 +162,13 @@
   <data name="DepId" xml:space="preserve">
     <value>DepartmentId</value>
   </data>
+  <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
+    <value>Password dose not match ConfirmPass</value>
+  </data>
+  <data name="MaxLengthis100" xml:space="preserve">
+    <value>Max lengthis 100</value>
+  </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value>Faild to add</value>
+  </data>
 </root>

@@ -57,5 +57,18 @@ namespace CleanArchProject.Data.AppMetaData
             public const string Delete = Prefix + "Delete/" + "{Id}";
 
         }
+        public static class AppUserRouting
+        {
+            public const string Prefix = "Users/";
+            public const string All = Prefix + "All";
+            public const string Paginated = Prefix + "Paginated";
+            public const string GetById = Prefix + "Id";
+            public const string Create = Prefix + "Create";
+            public const string Edit = Prefix + "Edit";
+            public const string Delete = Prefix + "Delete/" + "{Id}";
+
+        }
     }
+
+
 }
