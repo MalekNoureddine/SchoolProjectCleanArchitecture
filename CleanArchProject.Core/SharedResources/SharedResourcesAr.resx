@@ -177,4 +177,13 @@
   <data name="IsAlreadyExits" xml:space="preserve">
     <value>موجود بالفعل</value>
   </data>
+  <data name="PasswordNotEqualConfirmPass" xml:space="preserve">
+    <value>لا يوجد تطابق بين كلمتي السر</value>
+  </data>
+  <data name="MaxLengthis100" xml:space="preserve">
+    <value>اقصى مساحة هي  100</value>
+  </data>
+  <data name="FaildToAdd" xml:space="preserve">
+    <value>فشل عملية الاضافة</value>
+  </data>
 </root>
