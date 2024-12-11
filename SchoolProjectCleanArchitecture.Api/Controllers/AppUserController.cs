@@ -44,7 +44,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<User>> GetAllStudent([FromRoute] int Id)
+        public async Task<ActionResult<User>> GetUserById([FromRoute] int Id)
         {
             var response = await _mediator.Send(new GetUserByIdQuery(Id));
             return NewResult(response);
@@ -55,7 +55,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<User>> GetPaginatedStudents([FromQuery] GetUsersListQuery query)
+        public async Task<ActionResult<User>> GetPaginatedUsers([FromQuery] GetUsersListQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);

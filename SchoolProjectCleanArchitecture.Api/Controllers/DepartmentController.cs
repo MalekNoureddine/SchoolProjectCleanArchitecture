@@ -33,7 +33,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Department>> GetPaginatedStudents([FromQuery] GetPaginatedDepartmentsListQuery query)
+        public async Task<ActionResult<Department>> GetPaginatedDepartmentss([FromQuery] GetPaginatedDepartmentsListQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);
