@@ -12,6 +12,8 @@ namespace CleanArchProject.Core.Mapping.Users
         public UserProfile()
         {
             AddUserCommandMapping();
+            GetUserByIdMapping();
+            GetUserListMapping();
         }
     }
 }
