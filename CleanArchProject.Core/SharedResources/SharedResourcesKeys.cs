@@ -19,7 +19,6 @@ namespace CleanArchProject.Core.SharedResources
         public const string Success = "Success";
         public const string UpdateFailed = "UpdateFailed";
         public const string Updated = "Updated";
-        public const string DeleteionFailed = "DeleteionFailed";
 
         public const string NotEmpty = "NotEmpty";
         public const string NotNull = "NotNull";

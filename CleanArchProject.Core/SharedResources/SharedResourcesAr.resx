@@ -192,7 +192,4 @@
   <data name="Updated" xml:space="preserve">
     <value>تم التعديل بنجاح</value>
   </data>
-  <data name="DeleteionFailed" xml:space="preserve">
-    <value>فشل عملية الحذف</value>
-  </data>
 </root>

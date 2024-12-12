@@ -177,7 +177,4 @@
   <data name="Updated" xml:space="preserve">
     <value>Updated sucessfully</value>
   </data>
-  <data name="DeleteionFailed" xml:space="preserve">
-    <value>Deleteion failed</value>
-  </data>
 </root>
