@@ -17,6 +17,8 @@ namespace CleanArchProject.Core.SharedResources
         public const string UnAuthorized = "UnAuthorized";
         public const string UnprocessableEntity = "UnprocessableEntity";
         public const string Success = "Success";
+        public const string UpdateFailed = "UpdateFailed";
+        public const string Updated = "Updated";
 
         public const string NotEmpty = "NotEmpty";
         public const string NotNull = "NotNull";
