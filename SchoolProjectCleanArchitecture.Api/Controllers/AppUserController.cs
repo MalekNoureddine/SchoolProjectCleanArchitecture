@@ -89,6 +89,17 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return Ok(response);
         }
 
-
+        [HttpDelete]
+        [Route(Router.AppUserRouting.Delete)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<Student>> Delete([FromRoute] int Id)
+        {
+            var response = await _mediator.Send(new DeleteUserCommand(Id));
+            return NewResult(response);
+        }
     }
 }

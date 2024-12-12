@@ -88,6 +88,15 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فشل عملية الحذف.
+        /// </summary>
+        internal static string DeleteionFailed {
+            get {
+                return ResourceManager.GetString("DeleteionFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to القسم.
         /// </summary>
         internal static string Department {
