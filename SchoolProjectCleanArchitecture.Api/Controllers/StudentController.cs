@@ -4,6 +4,7 @@ using CleanArchProject.Core.Featurs.Students.Queries.Models;
 using CleanArchProject.Data.AppMetaData;
 using CleanArchProject.Data.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using Router = CleanArchProject.Data.AppMetaData.Router;
 namespace SchoolProjectCleanArchitecture.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class StudentController : AppBaseController
     {
         public StudentController(IMediator mediator)
@@ -29,7 +31,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return Ok(response);
         }
 
-
+        [AllowAnonymous]
         [HttpGet(Router.StudentRouteing.Paginated)]
 
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -37,6 +37,11 @@ namespace CleanArchProject.Core.SharedResources
         public const string MaxLengthis100 = "MaxLengthis100";
         public const string PasswordNotEqualConfirmPass = "PasswordNotEqualConfirmPass";
         public const string FaildToAddUser = "FaildToAddUser";
+        public const string UserName = "UserName";
+        public const string password = "password";
+        public const string UserNameIsNotExist = "UserNameIsNotExist";
+        public const string PasswordNotCorrect = "PasswordNotCorrect";
+        public const string EmailNotConfirmed = "EmailNotConfirmed";
     }
     
 }

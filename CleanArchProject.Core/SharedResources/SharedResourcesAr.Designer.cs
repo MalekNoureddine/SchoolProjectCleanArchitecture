@@ -88,15 +88,6 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to فشل عملية الحذف.
-        /// </summary>
-        internal static string DeleteionFailed {
-            get {
-                return ResourceManager.GetString("DeleteionFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to القسم.
         /// </summary>
         internal static string Department {
@@ -120,6 +111,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string DoseNotExists {
             get {
                 return ResourceManager.GetString("DoseNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الايميل غير مؤكد.
+        /// </summary>
+        internal static string EmailNotConfirmed {
+            get {
+                return ResourceManager.GetString("EmailNotConfirmed", resourceCulture);
             }
         }
         
@@ -201,6 +201,24 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string NotNull {
             get {
                 return ResourceManager.GetString("NotNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to كلمة المرور.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to كلمة مرور خاطئة.
+        /// </summary>
+        internal static string PasswordNotCorrect {
+            get {
+                return ResourceManager.GetString("PasswordNotCorrect", resourceCulture);
             }
         }
         
@@ -291,6 +309,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string UpdateFailed {
             get {
                 return ResourceManager.GetString("UpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسم المستخدم.
+        /// </summary>
+        internal static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
     }

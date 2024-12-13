@@ -88,15 +88,6 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleteion failed.
-        /// </summary>
-        internal static string DeleteionFailed {
-            get {
-                return ResourceManager.GetString("DeleteionFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Department.
         /// </summary>
         internal static string Dep {
@@ -120,6 +111,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string DoseNotExists {
             get {
                 return ResourceManager.GetString("DoseNotExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email is not confirmed.
+        /// </summary>
+        internal static string EmailNotConfirmed {
+            get {
+                return ResourceManager.GetString("EmailNotConfirmed", resourceCulture);
             }
         }
         
@@ -183,6 +183,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string NotNull {
             get {
                 return ResourceManager.GetString("NotNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is not correct.
+        /// </summary>
+        internal static string PasswordNotCorrect {
+            get {
+                return ResourceManager.GetString("PasswordNotCorrect", resourceCulture);
             }
         }
         

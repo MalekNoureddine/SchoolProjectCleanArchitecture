@@ -14,6 +14,7 @@ namespace CleanArchProject.Service
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<ISubjectService, SubjectService>();
             services.AddTransient<IInstructorService, InstructorService>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
             return services;
         }
     }

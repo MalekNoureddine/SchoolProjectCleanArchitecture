@@ -192,4 +192,16 @@
   <data name="Updated" xml:space="preserve">
     <value>تم التعديل بنجاح</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>الايميل غير مؤكد</value>
+  </data>
+  <data name="PasswordNotCorrect" xml:space="preserve">
+    <value>كلمة مرور خاطئة</value>
+  </data>
 </root>
