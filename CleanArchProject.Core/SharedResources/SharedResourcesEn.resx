@@ -177,4 +177,10 @@
   <data name="Updated" xml:space="preserve">
     <value>Updated sucessfully</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>Email is not confirmed</value>
+  </data>
+  <data name="PasswordNotCorrect" xml:space="preserve">
+    <value>Password is not correct</value>
+  </data>
 </root>

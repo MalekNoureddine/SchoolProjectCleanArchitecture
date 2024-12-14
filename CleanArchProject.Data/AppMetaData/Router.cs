@@ -69,7 +69,12 @@ namespace CleanArchProject.Data.AppMetaData
             public const string Delete = Prefix + "Delete/" + "{Id}";
 
         }
-    }
+        public static class AuthenticationRouting
+        {
+            public const string Prefix = "Authentication/";
+            public const string SignIn = Prefix + "SignIn";
+        }
+        }
 
 
 }
