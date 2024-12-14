@@ -19,6 +19,8 @@ namespace CleanArchProject.Infrastracture
             services.AddTransient<IDepartmentInstructorRepository, Department_InstructorRepository>();
             services.AddTransient<IStudentSubjectRepository, Student_SubjectRepository>();
 
+            services.AddTransient<IUserRefreshTokenRepository, UserRefreshTokenRepository>();
+
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             return services;
         }

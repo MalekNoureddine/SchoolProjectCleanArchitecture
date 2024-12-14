@@ -1,4 +1,5 @@
 ﻿using CleanArchProject.Core.Bases;
+using CleanArchProject.Data.Healper;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchProject.Core.Featurs.Authentication.Commands.Models
 {
-    public class SignInCommand : IRequest<Response<string>>
+    public class SignInCommand : IRequest<Response<JwtAuthResult>>
     {
         public string userName { get; set; }
         public string password { get; set; }

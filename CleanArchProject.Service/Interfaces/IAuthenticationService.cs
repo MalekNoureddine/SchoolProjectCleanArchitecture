@@ -1,4 +1,5 @@
 ﻿using CleanArchProject.Data.Entities.Identities;
+using CleanArchProject.Data.Healper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace CleanArchProject.Service.Interfaces
 {
     public interface IAuthenticationService
     {
-        public Task<string> GetJWTToken(User user);
+        public JwtAuthResult GetJWTToken(User user);
     }
 }
