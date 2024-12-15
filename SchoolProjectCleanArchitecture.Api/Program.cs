@@ -57,7 +57,7 @@ builder.Services.AddInfrastractureDependencies()
 #endregion
 
 #region CORS
-var _cors = "_cors";
+var _cors = "AllowAll";
 builder.Services.AddCors(options => options.AddPolicy(name: _cors, policy =>
 {
     policy.AllowAnyHeader();

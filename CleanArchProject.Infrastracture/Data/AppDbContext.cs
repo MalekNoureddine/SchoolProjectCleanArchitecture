@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using CleanArchProject.Data.Entities.Identies;
 
 
 namespace CleanArchProject.Infrastracture.Data
@@ -30,6 +31,7 @@ namespace CleanArchProject.Infrastracture.Data
         public DbSet<Dept_Instructor> Dept_Instructors { get; set; }
         public DbSet<Subj_Instructor> Subj_Instructors { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
