@@ -50,7 +50,7 @@ namespace CleanArchProject.Core.Featurs.Authentication.Commands.Handler
             //if (!user.EmailConfirmed)
             //    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.EmailNotConfirmed]);
             //Generate Token
-            var result = _authenticationService.GetJWTToken(user);
+            var result = await _authenticationService.GetJWTToken(user);
             //return Token 
             return Success(result);
         }

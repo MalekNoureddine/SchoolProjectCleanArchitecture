@@ -1,4 +1,6 @@
-﻿using CleanArchProject.Data.Entities.Identities;
+﻿using Azure.Core;
+using CleanArchProject.Data.Entities.Identies;
+using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Data.Healper;
 using CleanArchProject.Infrastracture.Interfaces;
 using CleanArchProject.Service.Interfaces;
@@ -35,7 +37,7 @@ namespace CleanArchProject.Service.ServicesImplementation
         #endregion
 
         #region Actions
-        public JwtAuthResult GetJWTToken(User user)
+        public async Task<JwtAuthResult> GetJWTToken(User user)
         {
             var claims = GetClaims(user);
 
@@ -45,13 +47,27 @@ namespace CleanArchProject.Service.ServicesImplementation
                 , SecurityAlgorithms.HmacSha256Signature));
 
 
-            var acsessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+            var accessToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
 
             RefreshToken refreshToken = GetRefreshToken(user.UserName);
 
+            var userRefreshToken = new UserRefreshToken
+            {
+                AddedTime = DateTime.Now,
+                ExpiryDate = DateTime.Now.AddDays(_jwtSettings.RefreshTokenExpireDate),
+                IsUsed = true,
+                IsRevoked = false,
+                JwtId = jwtSecurityToken.Id,
+                RefreshToken = refreshToken.TokenString,
+                Token = accessToken,
+                UserId = user.Id
+            };
+
+            await _userRefreshTokenRepository.AddAsync(userRefreshToken);
+
             var response = new JwtAuthResult
             {
-                AccessToken = acsessToken,
+                AccessToken = accessToken,
                 RefreshToken = refreshToken
             };
 

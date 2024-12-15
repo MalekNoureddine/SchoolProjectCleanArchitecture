@@ -10,6 +10,6 @@ namespace CleanArchProject.Service.Interfaces
 {
     public interface IAuthenticationService
     {
-        public JwtAuthResult GetJWTToken(User user);
+        public Task<JwtAuthResult> GetJWTToken(User user);
     }
 }
