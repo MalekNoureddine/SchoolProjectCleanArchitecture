@@ -13,6 +13,7 @@ namespace CleanArchProject.Data.Healper
     }
     public class RefreshToken
     {
+        public Guid Id { get; set; }
         public string Username { get; set; }
         public string TokenString { get; set; }
         public DateTime ExpireDate { get; set; }
