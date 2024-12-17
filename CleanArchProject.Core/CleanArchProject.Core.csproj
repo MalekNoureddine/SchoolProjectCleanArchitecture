@@ -51,8 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Featurs\Authentication\Queries\Handler\" />
-    <Folder Include="Featurs\Authentication\Queries\Models\" />
     <Folder Include="Featurs\Authentication\Queries\Responses\" />
     <Folder Include="Featurs\Users\Queries\Handler\" />
     <Folder Include="Featurs\Users\Queries\Models\" />

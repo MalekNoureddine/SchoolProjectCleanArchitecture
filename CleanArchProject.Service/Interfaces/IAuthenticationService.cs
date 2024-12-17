@@ -11,5 +11,7 @@ namespace CleanArchProject.Service.Interfaces
     public interface IAuthenticationService
     {
         public Task<JwtAuthResult> GetJWTToken(User user);
+        public Task<JwtAuthResult> GetRefreshToken(string accessToken, string refreshToken);
+        public Task<string> ValidateToken(string accessToken);
     }
 }

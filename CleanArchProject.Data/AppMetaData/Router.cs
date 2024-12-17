@@ -73,8 +73,10 @@ namespace CleanArchProject.Data.AppMetaData
         {
             public const string Prefix = "Authentication/";
             public const string SignIn = Prefix + "SignIn";
+            public const string RefreshToken = Prefix + "Refresh-Token";
+            public const string ValidateToken = Prefix + "Validate-Token";
         }
-        }
+    }
 
 
 }
