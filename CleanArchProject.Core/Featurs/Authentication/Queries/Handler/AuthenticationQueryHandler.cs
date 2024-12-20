@@ -36,7 +36,7 @@ namespace CleanArchProject.Core.Featurs.Authentication.Queries.Handler
         public async Task<Response<string>> Handle(AuthorizeUserQuery request, CancellationToken cancellationToken)
         {
             var result = await _authenticationService.ValidateToken(request.AccessToken);
-            return result == "IsActive" ? Success(result) : BadRequest<string>("Expired");
+            return result == "IsActive" ? Success(result) : Unauthorized<string>(_stringLocalizer[SharedResourcesKeys.TokenIsExpired]);
         }
         #endregion
     }

@@ -5,10 +5,14 @@ using CleanArchProject.Infrastracture.Data;
 using CleanArchProject.Infrastracture.Interfaces;
 using CleanArchProject.Infrastracture.Repositories;
 using CleanArchProject.Service;
+using dotenv.net;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using System.Globalization;
+
+DotEnv.Load();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
