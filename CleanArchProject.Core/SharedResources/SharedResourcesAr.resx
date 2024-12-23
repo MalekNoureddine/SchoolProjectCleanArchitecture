@@ -204,4 +204,22 @@
   <data name="PasswordNotCorrect" xml:space="preserve">
     <value>كلمة مرور خاطئة</value>
   </data>
+  <data name="AlgorithmIsWrong" xml:space="preserve">
+    <value>الحوارزمية المستعملة خاطئة</value>
+  </data>
+  <data name="TokenIsNotExpired" xml:space="preserve">
+    <value>رمز الوصول غير منتهي الصلاحية</value>
+  </data>
+  <data name="RefreshTokenIsNotFound" xml:space="preserve">
+    <value>رمز التنشيط عير موجود</value>
+  </data>
+  <data name="RefreshTokenIsExpired" xml:space="preserve">
+    <value>رمز التنشيط انتهت صلاحيته</value>
+  </data>
+  <data name="TokenIsExpired" xml:space="preserve">
+    <value>رمز الوصول منتهي الصلاحية</value>
+  </data>
+  <data name="RoleAlreadyExists" xml:space="preserve">
+    <value>هاذا الدور موجود بالفعل</value>
+  </data>
 </root>

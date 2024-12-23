@@ -1,4 +1,5 @@
-﻿using CleanArchProject.Data.Entities.Identities;
+﻿using CleanArchProject.Data.Entities.Identies;
+using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Data.Healper;
 using CleanArchProject.Infrastracture.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -21,12 +22,18 @@ namespace CleanArchProject.Infrastracture
         public static IServiceCollection AddServiceRegistration(this IServiceCollection services, IConfiguration configuration)
         {
             //Connection SQL
-            services.AddDbContext<AppDbContext>(option =>
+            string dbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            if (string.IsNullOrEmpty(dbConnectionString))
             {
-                option.UseSqlServer(configuration.GetConnectionString("dbcontext"));
+                throw new InvalidOperationException("Database connection string is not configured.");
+            }
+
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(dbConnectionString);
             });
 
-            services.AddIdentity<User, IdentityRole<int>>(options =>
+            services.AddIdentity<User, Role>(options =>
             {
                 // Password settings.
                 options.Password.RequireDigit = true;
@@ -57,8 +64,19 @@ namespace CleanArchProject.Infrastracture
 
 
             //JWT Authentication
-            var jwtSettings = new JwtSettings();
-            configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
+
+            var jwtSettings = new JwtSettings
+            {
+                Secret = Environment.GetEnvironmentVariable("JWT_SECRET"),
+                Issuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
+                Audience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
+                ValidateAudience = bool.Parse(Environment.GetEnvironmentVariable("JWT_VALIDATE_AUDIENCE") ?? "true"),
+                ValidateIssuer = bool.Parse(Environment.GetEnvironmentVariable("JWT_VALIDATE_ISSUER") ?? "true"),
+                ValidateLifeTime = bool.Parse(Environment.GetEnvironmentVariable("JWT_VALIDATE_LIFETIME") ?? "true"),
+                ValidateIssuerSigningKey = bool.Parse(Environment.GetEnvironmentVariable("JWT_VALIDATE_ISSUER_SIGNING_KEY") ?? "true"),
+                AccessTokenExpireDate = int.Parse(Environment.GetEnvironmentVariable("JWT_ACCESS_TOKEN_EXPIRE_DATE") ?? "1"),
+                RefreshTokenExpireDate = int.Parse(Environment.GetEnvironmentVariable("JWT_REFRESH_TOKEN_EXPIRE_DATE") ?? "20")
+            };
             services.AddSingleton(jwtSettings);
 
             services.AddAuthentication(x =>

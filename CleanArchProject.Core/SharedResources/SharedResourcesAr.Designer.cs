@@ -61,6 +61,15 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الحوارزمية المستعملة خاطئة.
+        /// </summary>
+        internal static string AlgorithmIsWrong {
+            get {
+                return ResourceManager.GetString("AlgorithmIsWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to طلب سيء.
         /// </summary>
         internal static string BadRequest {
@@ -241,11 +250,38 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to رمز التنشيط انتهت صلاحيته.
+        /// </summary>
+        internal static string RefreshTokenIsExpired {
+            get {
+                return ResourceManager.GetString("RefreshTokenIsExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رمز التنشيط عير موجود.
+        /// </summary>
+        internal static string RefreshTokenIsNotFound {
+            get {
+                return ResourceManager.GetString("RefreshTokenIsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to هاذا الحقل مطلوب.
         /// </summary>
         internal static string Required {
             get {
                 return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to هاذا الدور موجود بالفعل.
+        /// </summary>
+        internal static string RoleAlreadyExists {
+            get {
+                return ResourceManager.GetString("RoleAlreadyExists", resourceCulture);
             }
         }
         
@@ -273,6 +309,24 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رمز الوصول منتهي الصلاحية.
+        /// </summary>
+        internal static string TokenIsExpired {
+            get {
+                return ResourceManager.GetString("TokenIsExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رمز الوصول غير منتهي الصلاحية.
+        /// </summary>
+        internal static string TokenIsNotExpired {
+            get {
+                return ResourceManager.GetString("TokenIsNotExpired", resourceCulture);
             }
         }
         

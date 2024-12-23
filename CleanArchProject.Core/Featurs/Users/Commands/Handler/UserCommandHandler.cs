@@ -45,9 +45,15 @@ namespace CleanArchProject.Core.Featurs.Users.Commands.Handler
         public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             var identityUser = _mapper.Map<User>(request);
+
             var result = await _userManager.CreateAsync(identityUser, request.Password);
+            
             if (!result.Succeeded)
                 return  BadRequest<string>(string.Join(",", result.Errors.Select(x => x.Description).ToList()));
+       
+            
+            await _userManager.AddToRoleAsync(identityUser, "User");
+            
             return Success("");
         }
 

@@ -1,4 +1,5 @@
-﻿using CleanArchProject.Core.Bases;
+﻿using Azure.Core;
+using CleanArchProject.Core.Bases;
 using CleanArchProject.Core.Featurs.Authentication.Commands.Models;
 using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Data.Entities.Identities;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,7 +60,20 @@ namespace CleanArchProject.Core.Featurs.Authentication.Commands.Handler
 
         public async Task<Response<JwtAuthResult>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
         {
-            var response = await _authenticationService.GetRefreshToken(request.AccessToken, request.RefreshToken);
+            JwtSecurityToken jwtToken = _authenticationService.ReadJwtToken(request.AccessToken);
+            var userIdAndExpireDate = await _authenticationService.ValidateDetails(jwtToken, request.AccessToken, request.RefreshToken);
+            switch (userIdAndExpireDate)
+            {
+                case ("AlgorithmIsWrong", null): return Unauthorized<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.AlgorithmIsWrong]);
+                case ("TokenIsNotExpired", null): return Unauthorized<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.TokenIsNotExpired]);
+                case ("RefreshTokenIsNotFound", null): return Unauthorized<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.RefreshTokenIsNotFound]);
+                case ("RefreshTokenIsExpired", null): return Unauthorized<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.RefreshTokenIsExpired]);
+            }
+            var (userId, expiryDate) = userIdAndExpireDate;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return NotFound<JwtAuthResult>();
+
+            var response = await _authenticationService.GetRefreshToken(user,jwtToken,expiryDate, request.RefreshToken);
             return Success(response);
         }
         #endregion

@@ -61,6 +61,15 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Algorithm is wrong.
+        /// </summary>
+        internal static string AlgorithmIsWrong {
+            get {
+                return ResourceManager.GetString("AlgorithmIsWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bad request.
         /// </summary>
         internal static string BadRequest {
@@ -126,9 +135,9 @@ namespace CleanArchProject.Core.SharedResources {
         /// <summary>
         ///   Looks up a localized string similar to Faild to add.
         /// </summary>
-        internal static string FaildToAddUser {
+        internal static string FaildToAdd {
             get {
-                return ResourceManager.GetString("FaildToAddUser", resourceCulture);
+                return ResourceManager.GetString("FaildToAdd", resourceCulture);
             }
         }
         
@@ -205,6 +214,24 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Refresh token is expired.
+        /// </summary>
+        internal static string RefreshTokenIsExpired {
+            get {
+                return ResourceManager.GetString("RefreshTokenIsExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh token is not found.
+        /// </summary>
+        internal static string RefreshTokenIsNotFound {
+            get {
+                return ResourceManager.GetString("RefreshTokenIsNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to this field is required.
         /// </summary>
         internal static string Required {
@@ -214,11 +241,38 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ths role is already exists.
+        /// </summary>
+        internal static string RoleAlreadyExists {
+            get {
+                return ResourceManager.GetString("RoleAlreadyExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation was done  with Success.
         /// </summary>
         internal static string Success {
             get {
                 return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token is expired.
+        /// </summary>
+        internal static string TokenIsExpired {
+            get {
+                return ResourceManager.GetString("TokenIsExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Token is active (not expired).
+        /// </summary>
+        internal static string TokenIsNotExpired {
+            get {
+                return ResourceManager.GetString("TokenIsNotExpired", resourceCulture);
             }
         }
         
