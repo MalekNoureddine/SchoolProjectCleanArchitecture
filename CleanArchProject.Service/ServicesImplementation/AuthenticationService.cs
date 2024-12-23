@@ -73,7 +73,7 @@ namespace CleanArchProject.Service.ServicesImplementation
 
         private async Task<(JwtSecurityToken, string)> GenerateJWTToken(User user)
         {
-            var claims = GetClaims(user);
+            var claims = await GetClaims(user);
             var jwtToken = new JwtSecurityToken(
                 _jwtSettings.Issuer,
                 _jwtSettings.Audience,
@@ -84,15 +84,23 @@ namespace CleanArchProject.Service.ServicesImplementation
             return (jwtToken, accessToken);
         }
 
-        public List<Claim> GetClaims(User user)
+        public async Task<List<Claim>> GetClaims(User user)
         {
+            var roles = await _userManager.GetRolesAsync(user);
+
             var claims = new List<Claim>()
             {
-                new Claim(nameof(UserClaimModel.UserName), user.UserName),
-                new Claim(nameof(UserClaimModel.Email), user.Email),
+                new Claim(ClaimTypes.NameIdentifier, user.UserName),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(nameof(UserClaimModel.PhoneNumber), user.PhoneNumber),
-                new Claim(nameof(UserClaimModel.Id), user.Id.ToString())
+                new Claim(nameof(UserClaimModel.Id), user.Id.ToString()),
             };
+            
+            foreach(var role in roles){
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
             return claims;
         }
 
