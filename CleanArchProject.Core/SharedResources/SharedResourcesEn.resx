@@ -168,7 +168,7 @@
   <data name="MaxLengthis100" xml:space="preserve">
     <value>Max lengthis 100</value>
   </data>
-  <data name="FaildToAddUser" xml:space="preserve">
+  <data name="FaildToAdd" xml:space="preserve">
     <value>Faild to add</value>
   </data>
   <data name="UpdateFailed" xml:space="preserve">
@@ -197,5 +197,8 @@
   </data>
   <data name="TokenIsExpired" xml:space="preserve">
     <value>Token is expired</value>
+  </data>
+  <data name="RoleAlreadyExists" xml:space="preserve">
+    <value>Ths role is already exists</value>
   </data>
 </root>

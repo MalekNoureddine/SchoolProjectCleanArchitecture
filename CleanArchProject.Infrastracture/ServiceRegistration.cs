@@ -1,4 +1,5 @@
-﻿using CleanArchProject.Data.Entities.Identities;
+﻿using CleanArchProject.Data.Entities.Identies;
+using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Data.Healper;
 using CleanArchProject.Infrastracture.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,7 +33,7 @@ namespace CleanArchProject.Infrastracture
                 options.UseSqlServer(dbConnectionString);
             });
 
-            services.AddIdentity<User, IdentityRole<int>>(options =>
+            services.AddIdentity<User, Role>(options =>
             {
                 // Password settings.
                 options.Password.RequireDigit = true;
