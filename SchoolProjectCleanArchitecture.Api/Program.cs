@@ -1,11 +1,15 @@
 using CleanArchProject.Core;
 using CleanArchProject.Core.MiddleWares;
+using CleanArchProject.Data.Entities.Identies;
+using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Infrastracture;
 using CleanArchProject.Infrastracture.Data;
+using CleanArchProject.Infrastracture.DataSeeder;
 using CleanArchProject.Infrastracture.Interfaces;
 using CleanArchProject.Infrastracture.Repositories;
 using CleanArchProject.Service;
 using dotenv.net;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -70,6 +74,16 @@ builder.Services.AddCors(options => options.AddPolicy(name: _cors, policy =>
 }));
 #endregion
 var app = builder.Build();
+
+#region DataSeeding
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+    var rolManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
+    await RoleSeeder.SeedAsync(rolManager);
+    await UserSeeder.SeedAsync(userManager);
+}
+#endregion
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
