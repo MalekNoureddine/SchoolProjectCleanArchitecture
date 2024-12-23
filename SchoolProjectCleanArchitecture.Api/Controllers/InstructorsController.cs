@@ -5,6 +5,7 @@ using CleanArchProject.Core.Featurs.Instructors.Queries.Models;
 using CleanArchProject.Data.AppMetaData;
 using CleanArchProject.Data.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProjectCleanArchitecture.Api.Base;
@@ -12,6 +13,11 @@ using SchoolProjectCleanArchitecture.Api.Base;
 namespace SchoolProjectCleanArchitecture.Api.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "Admin,User")]// Admin or user
+    //{**Admin and user**
+    //[Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "User")]
+    //{**Admin and user**
     public class InstructorsController : AppBaseController
     {
         public InstructorsController(IMediator mediator) : base(mediator){}
@@ -51,6 +57,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]//Admin only
         [Route(Router.InstructorRouting.Create)]
 
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -59,7 +66,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<Instructor>> Create([FromBody] AddInstructorCommand instructorCommand)
         {
             var response = await _mediator.Send(instructorCommand);
@@ -68,6 +75,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
 
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]//Admin only
         [Route(Router.InstructorRouting.Edit)]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -76,6 +84,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<Instructor>> Edit([FromBody] EditInstructorCommand instructorCommand)
         {
             var response = await _mediator.Send(instructorCommand);
@@ -83,11 +92,13 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]//Admin only
         [Route(Router.InstructorRouting.Delete)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<Instructor>> Delete([FromRoute] int Id)
         {
