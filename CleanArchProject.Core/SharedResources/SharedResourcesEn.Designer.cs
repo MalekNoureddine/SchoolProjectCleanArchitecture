@@ -135,9 +135,9 @@ namespace CleanArchProject.Core.SharedResources {
         /// <summary>
         ///   Looks up a localized string similar to Faild to add.
         /// </summary>
-        internal static string FaildToAddUser {
+        internal static string FaildToAdd {
             get {
-                return ResourceManager.GetString("FaildToAddUser", resourceCulture);
+                return ResourceManager.GetString("FaildToAdd", resourceCulture);
             }
         }
         
@@ -237,6 +237,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string Required {
             get {
                 return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ths role is already exists.
+        /// </summary>
+        internal static string RoleAlreadyExists {
+            get {
+                return ResourceManager.GetString("RoleAlreadyExists", resourceCulture);
             }
         }
         

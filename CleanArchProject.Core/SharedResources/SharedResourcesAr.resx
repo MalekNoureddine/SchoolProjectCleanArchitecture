@@ -219,4 +219,7 @@
   <data name="TokenIsExpired" xml:space="preserve">
     <value>رمز الوصول منتهي الصلاحية</value>
   </data>
+  <data name="RoleAlreadyExists" xml:space="preserve">
+    <value>هاذا الدور موجود بالفعل</value>
+  </data>
 </root>

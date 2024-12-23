@@ -51,7 +51,7 @@ namespace CleanArchProject.Core.Featurs.Students.Commands.Validators
         public void ApplayCostumeValidationRules()
         {
             RuleFor(s => s.Phone).MustAsync(async (key, cancellationToken) => !await _studentService.IsPhoneNumberExists(key))
-                .WithMessage("Student with the same phone number is already exists");
+                .WithMessage(_stringLocalizer[SharedResourcesKeys.IsAlreadyExits]);
 
             RuleFor(s => s.DepartmentId).MustAsync(async (module, key, cancellationToken) => await _departmentService.IsDepartmentExists(module.DepartmentId))
                 .WithMessage(_stringLocalizer[SharedResourcesKeys.DoseNotExists]);

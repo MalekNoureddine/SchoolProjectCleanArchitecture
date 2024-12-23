@@ -45,9 +45,19 @@ namespace CleanArchProject.Core.Featurs.Users.Commands.Handler
         public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             var identityUser = _mapper.Map<User>(request);
+            var users = _userManager.Users.Any();
+            //check if any users exists
             var result = await _userManager.CreateAsync(identityUser, request.Password);
+            
             if (!result.Succeeded)
                 return  BadRequest<string>(string.Join(",", result.Errors.Select(x => x.Description).ToList()));
+            
+            // the first user will be an admin by default
+            if (!users)
+                await _userManager.AddToRoleAsync(identityUser, "Admin");
+            else
+                await _userManager.AddToRoleAsync(identityUser, "User");
+            
             return Success("");
         }
 

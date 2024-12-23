@@ -19,6 +19,7 @@ namespace CleanArchProject.Core.SharedResources
         public const string Success = "Success";
         public const string UpdateFailed = "UpdateFailed";
         public const string Updated = "Updated";
+        public const string FaildToAdd = "FaildToAdd";
 
         public const string NotEmpty = "NotEmpty";
         public const string NotNull = "NotNull";
@@ -36,7 +37,6 @@ namespace CleanArchProject.Core.SharedResources
         public const string IsAlreadyExits = "IsAlreadyExits";
         public const string MaxLengthis100 = "MaxLengthis100";
         public const string PasswordNotEqualConfirmPass = "PasswordNotEqualConfirmPass";
-        public const string FaildToAddUser = "FaildToAddUser";
         public const string UserName = "UserName";
         public const string password = "password";
         public const string UserNameIsNotExist = "UserNameIsNotExist";
@@ -47,6 +47,7 @@ namespace CleanArchProject.Core.SharedResources
         public const string TokenIsExpired = "TokenIsExpired";
         public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
         public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";
+        public const string RoleAlreadyExists = "RoleAlreadyExists";
     }
     
 }
