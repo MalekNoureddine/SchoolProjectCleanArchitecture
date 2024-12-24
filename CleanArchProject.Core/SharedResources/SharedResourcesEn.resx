@@ -201,4 +201,10 @@
   <data name="RoleAlreadyExists" xml:space="preserve">
     <value>Ths role is already exists</value>
   </data>
+  <data name="RoleDoseNotExist" xml:space="preserve">
+    <value>Role dose not exist</value>
+  </data>
+  <data name="RoleIsInUse" xml:space="preserve">
+    <value>Role is in useand can't be deleted</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using CleanArchProject.Data.Entities.Identies;
+using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Data.Requests;
 using CleanArchProject.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -15,11 +16,13 @@ namespace CleanArchProject.Service.ServicesImplementation
     {
         #region Fields
         private readonly RoleManager<Role> _roleManager;
+        private readonly UserManager<User> _userManager;
         #endregion
         #region Constructor
-        public AuthorizationService(RoleManager<Role> roleManager)
+        public AuthorizationService(RoleManager<Role> roleManager, UserManager<User> userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
         }
         #endregion
         #region Actions
@@ -54,6 +57,18 @@ namespace CleanArchProject.Service.ServicesImplementation
             if (errors == "Microsoft.AspNetCore.Identity.IdentityError")
                 return "IdentityError";
             return errors;
+        }
+
+        public async Task<string> DeleteRole(string roleName)
+        {
+            var roleToDelete = await _roleManager.FindByNameAsync(roleName);
+            if (roleToDelete is null) return "NotFound";
+            var users = await _userManager.GetUsersInRoleAsync(roleName);
+            if (users.Any()) return "Used";
+            var result = await _roleManager.DeleteAsync(roleToDelete);
+            if (result.Succeeded) return "Succeeded";
+            var errors = string.Join(",", result.Errors);
+            return errors; 
         }
         #endregion
     }

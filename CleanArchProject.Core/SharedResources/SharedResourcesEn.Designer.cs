@@ -250,6 +250,24 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Role dose not exist.
+        /// </summary>
+        internal static string RoleDoseNotExist {
+            get {
+                return ResourceManager.GetString("RoleDoseNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Role is in useand can&apos;t be deleted.
+        /// </summary>
+        internal static string RoleIsInUse {
+            get {
+                return ResourceManager.GetString("RoleIsInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Operation was done  with Success.
         /// </summary>
         internal static string Success {

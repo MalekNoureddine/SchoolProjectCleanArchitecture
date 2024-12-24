@@ -286,6 +286,24 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to صلاحية غير موجودة.
+        /// </summary>
+        internal static string RoleDoseNotExist {
+            get {
+                return ResourceManager.GetString("RoleDoseNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الصلاحية مستعملة و لايمكن حذفها.
+        /// </summary>
+        internal static string RoleIsInUse {
+            get {
+                return ResourceManager.GetString("RoleIsInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to طالب.
         /// </summary>
         internal static string Student {
