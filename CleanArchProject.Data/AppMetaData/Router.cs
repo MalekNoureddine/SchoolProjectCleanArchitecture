@@ -78,8 +78,9 @@ namespace CleanArchProject.Data.AppMetaData
         }
         public static class AuthorizationRouting
         {
-            public const string Prefix = "Authorization/";
+            public const string Prefix = "Authorization/Role/";
             public const string Create = Prefix + "Create";
+            public const string Edit = Prefix + "Edit";
 
         }
     }

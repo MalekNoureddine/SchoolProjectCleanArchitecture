@@ -14,7 +14,10 @@ using System.Threading.Tasks;
 
 namespace CleanArchProject.Core.Featurs.Authorization.Commands.Handler
 {
-    public class RoleCommandsHandler : ResponseHandler, IRequestHandler<AddRoleCommand, Response<string>>
+    public class RoleCommandsHandler : ResponseHandler,
+        IRequestHandler<AddRoleCommand, Response<string>>,
+        IRequestHandler<EditRoleCommand, Response<string>>
+
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources.SharedResources> _stringLocalizer;
@@ -36,6 +39,15 @@ IAuthorizationService authorizationService) : base(stringLocalizer)
         {
             var result = await _authorizationService.AddRole(request.RoleName);
             return result == "Success" ? Success<string>("") : BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FaildToAdd]);
+        }
+
+        public async Task<Response<string>> Handle(EditRoleCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authorizationService.EditRole(request);
+            if (result == "NotFound") return NotFound<string>();
+            else if (result == "Succeeded") return Success<string>(_stringLocalizer[SharedResourcesKeys.Updated]);
+            else if (result == "IdentityError") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.RoleAlreadyExists]);
+            else return BadRequest<string>(result);
         }
     }
 }

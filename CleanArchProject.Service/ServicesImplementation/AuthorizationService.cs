@@ -1,6 +1,8 @@
 ﻿using CleanArchProject.Data.Entities.Identies;
+using CleanArchProject.Data.Requests;
 using CleanArchProject.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +36,24 @@ namespace CleanArchProject.Service.ServicesImplementation
         public Task<bool> IsRoleExists(string roleName)
         {
             return _roleManager.RoleExistsAsync(roleName);
+        }
+
+        public async Task<bool> IsRoleExists(string roleName, int Id)
+        {
+            var role = await _roleManager.Roles.AnyAsync(x => x.Id != Id && x.Name == roleName);
+            return role;
+        }
+        public async Task<string> EditRole(EditRoleRequest editRoleRequest)
+        {
+            var role = await _roleManager.FindByIdAsync(editRoleRequest.Id.ToString());
+            if (role is null) return "NotFound";
+            role.Name = editRoleRequest.Name;
+            var result = await _roleManager.UpdateAsync(role);
+            if (result.Succeeded) return "Succeeded";
+            var errors = string.Join(",", result.Errors);
+            if (errors == "Microsoft.AspNetCore.Identity.IdentityError")
+                return "IdentityError";
+            return errors;
         }
         #endregion
     }
