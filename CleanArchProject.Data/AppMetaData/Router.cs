@@ -79,6 +79,9 @@ namespace CleanArchProject.Data.AppMetaData
         public static class AuthorizationRouting
         {
             public const string Prefix = "Authorization/Role/";
+            public const string All = Prefix + "All";
+            public const string GetById = Prefix + "GetById/{Id}";
+            public const string GetByName = Prefix + "GetByName/{Name}";
             public const string Create = Prefix + "Create";
             public const string Edit = Prefix + "Edit";
             public const string Delete = Prefix + "Delete/{RoleName}";

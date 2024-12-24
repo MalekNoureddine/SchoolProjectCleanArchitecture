@@ -52,12 +52,10 @@
 
   <ItemGroup>
     <Folder Include="Featurs\Authentication\Queries\Responses\" />
-    <Folder Include="Featurs\Authorization\Queries\Handler\" />
-    <Folder Include="Featurs\Authorization\Queries\Models\" />
-    <Folder Include="Featurs\Authorization\Queries\Responses\" />
     <Folder Include="Featurs\Users\Queries\Handler\" />
     <Folder Include="Featurs\Users\Queries\Models\" />
     <Folder Include="Featurs\Users\Queries\Responses\" />
+    <Folder Include="Mapping\Roles\CommandMapping\" />
     <Folder Include="Mapping\Users\Query\" />
   </ItemGroup>
 
