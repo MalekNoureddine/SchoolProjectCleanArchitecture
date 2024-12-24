@@ -1,4 +1,5 @@
 ﻿using CleanArchProject.Core.Featurs.Authorization.Commands.Models;
+using CleanArchProject.Core.Featurs.Authorization.Queries.Models;
 using CleanArchProject.Core.Featurs.Users.Commands.Models;
 using CleanArchProject.Data.AppMetaData;
 using CleanArchProject.Data.Entities.Identities;
@@ -60,6 +61,50 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         public async Task<IActionResult> Delete([FromRoute] string RoleName)
         {
             var response = await _mediator.Send(new DeleteRoleCommand(RoleName));
+            return NewResult(response);
+        }
+
+        [HttpGet]
+        [Route(Router.AuthorizationRouting.All)]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> All()
+        {
+            var response = await _mediator.Send(new GetRolesListQuery());
+            return NewResult(response);
+        }
+
+        [HttpGet]
+        [Route(Router.AuthorizationRouting.GetById)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> GetById([FromRoute] int Id)
+        {
+            var response = await _mediator.Send(new GetRoleByIdQuery() { Id = Id});
+            return NewResult(response);
+        }
+
+        [HttpGet]
+        [Route(Router.AuthorizationRouting.GetByName)]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> GetByName([FromRoute] string Name)
+        {
+            var response = await _mediator.Send(new GetRoleByNameQuery() {Name = Name});
             return NewResult(response);
         }
     }

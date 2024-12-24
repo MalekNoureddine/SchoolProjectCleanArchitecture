@@ -68,7 +68,25 @@ namespace CleanArchProject.Service.ServicesImplementation
             var result = await _roleManager.DeleteAsync(roleToDelete);
             if (result.Succeeded) return "Succeeded";
             var errors = string.Join(",", result.Errors);
-            return errors; 
+            return errors;
+        }
+
+        public async Task<List<Role>> GetRolesList()
+        {
+            var roles = await _roleManager.Roles.ToListAsync();
+            return roles;
+        }
+
+        public async Task<Role> GetRolesById(int Id)
+        {
+            var role = await _roleManager.FindByIdAsync(Id.ToString());
+            return role;
+        }
+
+        public async Task<Role> GetRolesByName(string Name)
+        {
+            var role = await _roleManager.FindByNameAsync(Name);
+            return role;
         }
         #endregion
     }
