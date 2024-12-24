@@ -222,4 +222,10 @@
   <data name="RoleAlreadyExists" xml:space="preserve">
     <value>هاذا الدور موجود بالفعل</value>
   </data>
+  <data name="RoleDoseNotExist" xml:space="preserve">
+    <value>صلاحية غير موجودة</value>
+  </data>
+  <data name="RoleIsInUse" xml:space="preserve">
+    <value>الصلاحية مستعملة و لايمكن حذفها</value>
+  </data>
 </root>

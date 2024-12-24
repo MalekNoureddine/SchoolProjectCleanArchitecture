@@ -16,7 +16,8 @@ namespace CleanArchProject.Core.Featurs.Authorization.Commands.Handler
 {
     public class RoleCommandsHandler : ResponseHandler,
         IRequestHandler<AddRoleCommand, Response<string>>,
-        IRequestHandler<EditRoleCommand, Response<string>>
+        IRequestHandler<EditRoleCommand, Response<string>>,
+        IRequestHandler<DeleteRoleCommand, Response<string>>
 
     {
         #region Fields
@@ -47,6 +48,16 @@ IAuthorizationService authorizationService) : base(stringLocalizer)
             if (result == "NotFound") return NotFound<string>();
             else if (result == "Succeeded") return Success<string>(_stringLocalizer[SharedResourcesKeys.Updated]);
             else if (result == "IdentityError") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.RoleAlreadyExists]);
+            else return BadRequest<string>(result);
+        }
+
+        public async Task<Response<string>> Handle(DeleteRoleCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authorizationService.DeleteRole(request.RoleName);
+
+            if (result == "NotFound") return BadRequest<string>();
+            if(result == "Used") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.RoleIsInUse]);
+            if (result == "Succeeded") return Success<string>(_stringLocalizer[SharedResourcesKeys.Deleted]);
             else return BadRequest<string>(result);
         }
     }

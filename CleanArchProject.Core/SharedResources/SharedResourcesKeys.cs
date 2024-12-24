@@ -48,6 +48,8 @@ namespace CleanArchProject.Core.SharedResources
         public const string RefreshTokenIsNotFound = "RefreshTokenIsNotFound";
         public const string RefreshTokenIsExpired = "RefreshTokenIsExpired";
         public const string RoleAlreadyExists = "RoleAlreadyExists";
+        public const string RoleDoseNotExist = "RoleDoseNotExist";
+        public const string RoleIsInUse = "RoleIsInUse";
     }
     
 }
