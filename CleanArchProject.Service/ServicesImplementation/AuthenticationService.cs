@@ -126,7 +126,7 @@ namespace CleanArchProject.Service.ServicesImplementation
             //Generater refresh token
             var refreshTokenResult = new RefreshToken
             {
-                Username = jwtToken.Claims.FirstOrDefault(x => x.Type == nameof(UserClaimModel.UserName)).Value,
+                Username = jwtToken.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value,
                 ExpireDate = (DateTime)ExpiryDate,
                 TokenString = refreshToken
             };

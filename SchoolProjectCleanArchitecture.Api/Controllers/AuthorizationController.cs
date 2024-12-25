@@ -107,5 +107,20 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             var response = await _mediator.Send(new GetRoleByNameQuery() {Name = Name});
             return NewResult(response);
         }
+
+        [HttpGet]
+        [Route(Router.AuthorizationRouting.ManageUserRoles)]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> ManageUserRoles([FromRoute] int UserId)
+        {
+            var response = await _mediator.Send(new ManageUserRolesQuery() { UserId = UserId });
+            return NewResult(response);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CleanArchProject.Data.Entities.Identies;
 using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Data.Requests;
+using CleanArchProject.Data.Results;
 using CleanArchProject.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -87,6 +88,26 @@ namespace CleanArchProject.Service.ServicesImplementation
         {
             var role = await _roleManager.FindByNameAsync(Name);
             return role;
+        }
+
+        public async Task<ManageUserRolesResult> GetRolesOfUsuer(User user)
+        {
+            var response = new ManageUserRolesResult();
+            var Roles = new List<Roles>();
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var roles = await _roleManager.Roles.ToListAsync();
+
+            foreach (var role in roles)
+            {
+                var UserRole = new Roles { Id = role.Id, Name = role.Name };
+                UserRole.HasRole = userRoles.Contains(role.Name);
+                Roles.Add(UserRole);
+            }
+            response.UserId = user.Id;
+            response.Roles = Roles;
+            return response;
+
         }
         #endregion
     }
