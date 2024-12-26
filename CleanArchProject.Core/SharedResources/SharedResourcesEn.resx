@@ -207,4 +207,10 @@
   <data name="RoleIsInUse" xml:space="preserve">
     <value>Role is in useand can't be deleted</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User was not found</value>
+  </data>
+  <data name="FailedToRemoveOldRoles" xml:space="preserve">
+    <value>Failed to remove old roles</value>
+  </data>
 </root>

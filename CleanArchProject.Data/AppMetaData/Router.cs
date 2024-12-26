@@ -86,6 +86,7 @@ namespace CleanArchProject.Data.AppMetaData
             public const string Edit = Prefix + "Edit";
             public const string Delete = Prefix + "Delete/{RoleName}";
             public const string ManageUserRoles = Prefix + "ManageUserRoles/{UserId}";
+            public const string UpdateUserRoles = Prefix + "UpdateUserRoles";
 
         }
     }

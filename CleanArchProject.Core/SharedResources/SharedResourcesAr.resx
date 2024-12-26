@@ -228,4 +228,13 @@
   <data name="RoleIsInUse" xml:space="preserve">
     <value>الصلاحية مستعملة و لايمكن حذفها</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>لم يتم العثور على المستخدم</value>
+  </data>
+  <data name="FailedToRemoveOldRoles" xml:space="preserve">
+    <value>فشل عملية حذف الصلاحيات القديمة</value>
+  </data>
+  <data name="FailedToAddNewRoles" xml:space="preserve">
+    <value>فشل عملية اضافة صلاحيات جديدة</value>
+  </data>
 </root>

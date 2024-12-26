@@ -17,8 +17,9 @@ namespace CleanArchProject.Service.Interfaces
         public Task<Role> GetRolesById(int Id);
         public Task<Role> GetRolesByName(string Name);
         public Task<string> AddRole(string roleName);
-        public Task<string> EditRole(EditRoleRequest editRoleRequest);
         public Task<string> DeleteRole(string roleName);
+        public Task<string> EditRole(EditRoleRequest editRoleRequest);
+        public Task<string> UpdateUseRole(UpdateUserRoleRequest request);
         public Task<bool> IsRoleExists(string roleName);
         public Task<bool> IsRoleExists(string roleName, int Id);
     }
