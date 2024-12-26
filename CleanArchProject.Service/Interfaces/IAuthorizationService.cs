@@ -1,4 +1,5 @@
-﻿using CleanArchProject.Data.Entities.Identies;
+﻿using Azure;
+using CleanArchProject.Data.Entities.Identies;
 using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Data.Requests;
 using CleanArchProject.Data.Results;
@@ -19,8 +20,9 @@ namespace CleanArchProject.Service.Interfaces
         public Task<string> AddRole(string roleName);
         public Task<string> DeleteRole(string roleName);
         public Task<string> EditRole(EditRoleRequest editRoleRequest);
-        public Task<string> UpdateUseRole(UpdateUserRoleRequest request);
+        public Task<string> ManageUserRole(UpdateUserRoleRequest request);
         public Task<bool> IsRoleExists(string roleName);
         public Task<bool> IsRoleExists(string roleName, int Id);
+        Task<ManageUserClaimsResult> ManageUserClaimData(User user);
     }
 }

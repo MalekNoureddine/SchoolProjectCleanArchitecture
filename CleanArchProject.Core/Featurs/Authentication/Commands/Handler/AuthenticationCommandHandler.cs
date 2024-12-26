@@ -3,7 +3,7 @@ using CleanArchProject.Core.Bases;
 using CleanArchProject.Core.Featurs.Authentication.Commands.Models;
 using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Data.Entities.Identities;
-using CleanArchProject.Data.Healper;
+using CleanArchProject.Data.Results;
 using CleanArchProject.Service.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

@@ -64,7 +64,7 @@ IAuthorizationService authorizationService) : base(stringLocalizer)
 
         public async Task<Response<string>> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
         {
-            var result = await _authorizationService.UpdateUseRole(request);
+            var result = await _authorizationService.ManageUserRole(request);
             switch (result)
             {
                 case "NotFound": return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
