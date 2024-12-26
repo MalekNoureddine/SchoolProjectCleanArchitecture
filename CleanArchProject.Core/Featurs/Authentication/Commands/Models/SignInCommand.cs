@@ -1,5 +1,5 @@
 ﻿using CleanArchProject.Core.Bases;
-using CleanArchProject.Data.Healper;
+using CleanArchProject.Data.Results;
 using MediatR;
 using System;
 using System.Collections.Generic;

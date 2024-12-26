@@ -1,5 +1,6 @@
 ﻿using CleanArchProject.Data.Entities.Identies;
 using CleanArchProject.Data.Entities.Identities;
+using CleanArchProject.Data.Healper;
 using CleanArchProject.Data.Requests;
 using CleanArchProject.Data.Results;
 using CleanArchProject.Infrastracture.Data;
@@ -113,7 +114,7 @@ namespace CleanArchProject.Service.ServicesImplementation
 
         }
 
-        public async Task<string> UpdateUseRole(UpdateUserRoleRequest request)
+        public async Task<string> ManageUserRole(UpdateUserRoleRequest request)
         {
             var transact = await _dbContext.Database.BeginTransactionAsync();
             try
@@ -145,6 +146,24 @@ namespace CleanArchProject.Service.ServicesImplementation
                 transact.Rollback();
                 return "FailedToUpdateUserRoles";
             }
+        }
+
+        public async Task<ManageUserClaimsResult> ManageUserClaimData(User user)
+        {
+            var response = new ManageUserClaimsResult();
+            var userClaimList = new List<UserClaims>();
+
+            response.UserId = user.Id;
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            foreach (var claim in ClaimStore.Claims)
+            {
+                var userClaim = new UserClaims();
+                userClaim.Type = claim.Type;
+                userClaim.Value = userClaims.Any(x => x.Type == claim.Type);
+                userClaimList.Add(userClaim);
+            }
+            response.userClaims = userClaimList;
+            return response;
         }
         #endregion
     }

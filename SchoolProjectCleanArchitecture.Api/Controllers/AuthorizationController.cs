@@ -66,7 +66,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         }
 
         [HttpGet]
-        [Route(Router.AuthorizationRouting.All)]
+        [Route(Router.AuthorizationRouting.RolesList)]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -74,14 +74,14 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> RolesList()
         {
             var response = await _mediator.Send(new GetRolesListQuery());
             return NewResult(response);
         }
 
         [HttpGet]
-        [Route(Router.AuthorizationRouting.GetById)]
+        [Route(Router.AuthorizationRouting.GetRoleById)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -95,7 +95,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         }
 
         [HttpGet]
-        [Route(Router.AuthorizationRouting.GetByName)]
+        [Route(Router.AuthorizationRouting.GetRoleByName)]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -126,9 +126,29 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
 
         [SwaggerOperation(Summary = " تعديل صلاحيات المستخدمين", OperationId = "UpdateUserRoles")]
         [HttpPut(Router.AuthorizationRouting.UpdateUserRoles)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateUserRoleCommand command)
         {
             var response = await _mediator.Send(command);
+            return NewResult(response);
+        }
+
+        [SwaggerOperation(Summary = " ادارة صلاحيات الاستخدام المستخدمين", OperationId = "ManageUserClaims")]
+        [HttpGet(Router.AuthorizationRouting.ManageUserClaims)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<IActionResult> ManageUserClaims([FromRoute] int userId)
+        {
+            var response = await _mediator.Send(new ManageUserClaimsQuery() { UserId = userId });
             return NewResult(response);
         }
     }

@@ -1,5 +1,5 @@
 ﻿using CleanArchProject.Data.Entities.Identities;
-using CleanArchProject.Data.Healper;
+using CleanArchProject.Data.Results;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
