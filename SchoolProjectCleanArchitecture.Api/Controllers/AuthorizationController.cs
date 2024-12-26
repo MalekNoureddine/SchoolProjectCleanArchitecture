@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProjectCleanArchitecture.Api.Base;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace SchoolProjectCleanArchitecture.Api.Controllers
 {
@@ -120,6 +121,14 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         public async Task<IActionResult> ManageUserRoles([FromRoute] int UserId)
         {
             var response = await _mediator.Send(new ManageUserRolesQuery() { UserId = UserId });
+            return NewResult(response);
+        }
+
+        [SwaggerOperation(Summary = " تعديل صلاحيات المستخدمين", OperationId = "UpdateUserRoles")]
+        [HttpPut(Router.AuthorizationRouting.UpdateUserRoles)]
+        public async Task<IActionResult> UpdateUserRoles([FromBody] UpdateUserRoleCommand command)
+        {
+            var response = await _mediator.Send(command);
             return NewResult(response);
         }
     }

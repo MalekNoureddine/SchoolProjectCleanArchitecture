@@ -2,6 +2,7 @@
 using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Data.Requests;
 using CleanArchProject.Data.Results;
+using CleanArchProject.Infrastracture.Data;
 using CleanArchProject.Service.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -18,12 +19,14 @@ namespace CleanArchProject.Service.ServicesImplementation
         #region Fields
         private readonly RoleManager<Role> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly AppDbContext _dbContext;
         #endregion
         #region Constructor
-        public AuthorizationService(RoleManager<Role> roleManager, UserManager<User> userManager)
+        public AuthorizationService(RoleManager<Role> roleManager, UserManager<User> userManager, AppDbContext dbContext)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _dbContext = dbContext;
         }
         #endregion
         #region Actions
@@ -108,6 +111,40 @@ namespace CleanArchProject.Service.ServicesImplementation
             response.Roles = Roles;
             return response;
 
+        }
+
+        public async Task<string> UpdateUseRole(UpdateUserRoleRequest request)
+        {
+            var transact = await _dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user =  await _userManager.FindByIdAsync(request.UserId.ToString());
+                if (user is null) return "NotFound";
+
+                var userRoles = await _userManager.GetRolesAsync(user);
+
+                var RemoveOldRolesresult = await _userManager.RemoveFromRolesAsync(user, userRoles);
+                if (!RemoveOldRolesresult.Succeeded)
+                {
+                    transact.Rollback();
+                    return "FailedToRemoveOldRoles";
+                }
+                var selectRoles = request.Roles.Where(x => x.HasRole).Select(x => x.Name);
+
+                var AddNewRolesResult = await _userManager.AddToRolesAsync(user, selectRoles);
+                if (!AddNewRolesResult.Succeeded)
+                {
+                    transact.Rollback();
+                    return "FailedToAddNewRoles";
+                }
+                transact.Commit();
+                return "Success";
+            }
+            catch (Exception)
+            {
+                transact.Rollback();
+                return "FailedToUpdateUserRoles";
+            }
         }
         #endregion
     }

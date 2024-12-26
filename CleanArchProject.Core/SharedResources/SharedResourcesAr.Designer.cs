@@ -142,6 +142,24 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فشل عملية اضافة صلاحيات جديدة.
+        /// </summary>
+        internal static string FailedToAddNewRoles {
+            get {
+                return ResourceManager.GetString("FailedToAddNewRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فشل عملية حذف الصلاحيات القديمة.
+        /// </summary>
+        internal static string FailedToRemoveOldRoles {
+            get {
+                return ResourceManager.GetString("FailedToRemoveOldRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to يجب ان يكون اكبر من الصفر.
         /// </summary>
         internal static string GreaterThan0 {
@@ -390,6 +408,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to لم يتم العثور على المستخدم.
+        /// </summary>
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }
     }

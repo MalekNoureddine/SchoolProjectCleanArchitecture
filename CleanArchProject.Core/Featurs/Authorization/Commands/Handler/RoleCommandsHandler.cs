@@ -17,7 +17,8 @@ namespace CleanArchProject.Core.Featurs.Authorization.Commands.Handler
     public class RoleCommandsHandler : ResponseHandler,
         IRequestHandler<AddRoleCommand, Response<string>>,
         IRequestHandler<EditRoleCommand, Response<string>>,
-        IRequestHandler<DeleteRoleCommand, Response<string>>
+        IRequestHandler<DeleteRoleCommand, Response<string>>,
+        IRequestHandler<UpdateUserRoleCommand, Response<string>>
 
     {
         #region Fields
@@ -59,6 +60,21 @@ IAuthorizationService authorizationService) : base(stringLocalizer)
             if(result == "Used") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.RoleIsInUse]);
             if (result == "Succeeded") return Success<string>(_stringLocalizer[SharedResourcesKeys.Deleted]);
             else return BadRequest<string>(result);
+        }
+
+        public async Task<Response<string>> Handle(UpdateUserRoleCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authorizationService.UpdateUseRole(request);
+            switch (result)
+            {
+                case "NotFound": return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
+                case "FailedToRemoveOldRoles": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToRemoveOldRoles]);
+                case "FailedToAddNewRoles": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FailedToAddNewRoles]);
+                case "Success": return Success<string>(_stringLocalizer[SharedResourcesKeys.Updated]);
+                case "FailedToUpdateUserRoles": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UpdateFailed]);
+                default:
+                    return Success<string>(result);
+            }
         }
     }
 }

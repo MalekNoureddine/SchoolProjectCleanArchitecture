@@ -142,6 +142,15 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to remove old roles.
+        /// </summary>
+        internal static string FailedToRemoveOldRoles {
+            get {
+                return ResourceManager.GetString("FailedToRemoveOldRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value should be greater than 0.
         /// </summary>
         internal static string GreaterThan0 {
@@ -327,6 +336,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string UpdateFailed {
             get {
                 return ResourceManager.GetString("UpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User was not found.
+        /// </summary>
+        internal static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }
     }

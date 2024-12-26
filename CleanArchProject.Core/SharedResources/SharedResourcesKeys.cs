@@ -50,6 +50,9 @@ namespace CleanArchProject.Core.SharedResources
         public const string RoleAlreadyExists = "RoleAlreadyExists";
         public const string RoleDoseNotExist = "RoleDoseNotExist";
         public const string RoleIsInUse = "RoleIsInUse";
+        public const string UserNotFound = "UserNotFound";
+        public const string FailedToRemoveOldRoles = "FailedToRemoveOldRoles";
+        public const string FailedToAddNewRoles = "FailedToAddNewRoles";
     }
     
 }
