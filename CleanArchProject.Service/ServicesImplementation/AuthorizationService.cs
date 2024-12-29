@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -165,6 +166,41 @@ namespace CleanArchProject.Service.ServicesImplementation
             response.userClaims = userClaimList;
             return response;
         }
+
+        public async Task<string> ManageUserClaims(UpdateUserClaimsResquest request)
+        {
+            var transact = await _dbContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+                if (user is null) return "NotFound";
+
+                var userClaims = await _userManager.GetClaimsAsync(user);
+
+                var RemoveOldClaimsResult = await _userManager.RemoveClaimsAsync(user, userClaims);
+                if (!RemoveOldClaimsResult.Succeeded)
+                {
+                    transact.Rollback();
+                    return "FailedToRemoveOldClaims";
+                }
+                var selectedClaims = request.userClaims.Where(x => x.Value).Select(x => new Claim(x.Type,x.Value.ToString()));
+
+                var AddNewRolesResult = await _userManager.AddClaimsAsync(user, selectedClaims);
+                if (!AddNewRolesResult.Succeeded)
+                {
+                    transact.Rollback();
+                    return "FailedToAddNewClaims";
+                }
+                transact.Commit();
+                return "Success";
+            }
+            catch (Exception)
+            {
+                transact.Rollback();
+                return "FailedToUpdateUserClaims";
+            }
+        }
+
         #endregion
     }
 }
