@@ -91,7 +91,6 @@ namespace CleanArchProject.Data.AppMetaData
             public const string ManageUserRoles = Roles + "/Manage-User-Roles/{userId}";
             public const string UpdateUserRoles = Roles + "/Update-User-Roles";
             public const string ManageUserClaims = Claims + "/Manage-User-Claims/{userId}";
-            public const string UpdateUserClaims = Claims + "/Update-User-Claims";
 
         }
     }
