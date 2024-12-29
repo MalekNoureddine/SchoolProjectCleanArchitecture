@@ -142,11 +142,29 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فشل في اضافة صلاحيات استخدام جديدة.
+        /// </summary>
+        internal static string FailedToAddNewClaims {
+            get {
+                return ResourceManager.GetString("FailedToAddNewClaims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to فشل عملية اضافة صلاحيات جديدة.
         /// </summary>
         internal static string FailedToAddNewRoles {
             get {
                 return ResourceManager.GetString("FailedToAddNewRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فشل في حذف صلاحيات الاستخدام القديمة.
+        /// </summary>
+        internal static string FailedToRemoveOldClaims {
+            get {
+                return ResourceManager.GetString("FailedToRemoveOldClaims", resourceCulture);
             }
         }
         

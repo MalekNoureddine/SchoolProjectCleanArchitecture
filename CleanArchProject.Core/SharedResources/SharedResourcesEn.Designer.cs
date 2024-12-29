@@ -142,6 +142,24 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to add new claims.
+        /// </summary>
+        internal static string FailedToAddNewClaims {
+            get {
+                return ResourceManager.GetString("FailedToAddNewClaims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to remove old claims.
+        /// </summary>
+        internal static string FailedToRemoveOldClaims {
+            get {
+                return ResourceManager.GetString("FailedToRemoveOldClaims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to remove old roles.
         /// </summary>
         internal static string FailedToRemoveOldRoles {

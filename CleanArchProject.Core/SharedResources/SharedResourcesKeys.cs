@@ -53,6 +53,8 @@ namespace CleanArchProject.Core.SharedResources
         public const string UserNotFound = "UserNotFound";
         public const string FailedToRemoveOldRoles = "FailedToRemoveOldRoles";
         public const string FailedToAddNewRoles = "FailedToAddNewRoles";
+        public const string FailedToRemoveOldClaims = "FailedToRemoveOldClaims";
+        public const string FailedToAddNewClaims = "FailedToAddNewClaims";
     }
     
 }

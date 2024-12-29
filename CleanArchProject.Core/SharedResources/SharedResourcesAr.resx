@@ -237,4 +237,10 @@
   <data name="FailedToAddNewRoles" xml:space="preserve">
     <value>فشل عملية اضافة صلاحيات جديدة</value>
   </data>
+  <data name="FailedToRemoveOldClaims" xml:space="preserve">
+    <value>فشل في حذف صلاحيات الاستخدام القديمة</value>
+  </data>
+  <data name="FailedToAddNewClaims" xml:space="preserve">
+    <value>فشل في اضافة صلاحيات استخدام جديدة</value>
+  </data>
 </root>

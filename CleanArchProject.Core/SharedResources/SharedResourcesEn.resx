@@ -213,4 +213,10 @@
   <data name="FailedToRemoveOldRoles" xml:space="preserve">
     <value>Failed to remove old roles</value>
   </data>
+  <data name="FailedToRemoveOldClaims" xml:space="preserve">
+    <value>Failed to remove old claims</value>
+  </data>
+  <data name="FailedToAddNewClaims" xml:space="preserve">
+    <value>Failed to add new claims</value>
+  </data>
 </root>
