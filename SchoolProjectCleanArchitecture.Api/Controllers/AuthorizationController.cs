@@ -90,7 +90,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<IActionResult> GetById([FromRoute] int Id)
         {
-            var response = await _mediator.Send(new GetRoleByIdQuery() { Id = Id});
+            var response = await _mediator.Send(new GetRoleByIdQuery(Id));
             return NewResult(response);
         }
 
@@ -118,9 +118,9 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<IActionResult> ManageUserRoles([FromRoute] int UserId)
+        public async Task<IActionResult> ManageUserRoles([FromRoute] int userId)
         {
-            var response = await _mediator.Send(new ManageUserRolesQuery() { UserId = UserId });
+            var response = await _mediator.Send(new ManageUserRolesQuery() { UserId = userId });
             return NewResult(response);
         }
 

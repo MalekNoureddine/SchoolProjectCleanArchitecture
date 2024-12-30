@@ -20,7 +20,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         public StudentController(IMediator mediator)
             :base(mediator){ }
 
-
+        [Authorize(Policy = "RetriveStudentLists")]
         [HttpGet(Router.StudentRouteing.All)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -31,7 +31,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return Ok(response);
         }
 
-        [AllowAnonymous]
+        [Authorize(Policy = "RetriveStudentLists")]
         [HttpGet(Router.StudentRouteing.Paginated)]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -43,6 +43,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return Ok(response);
         }
 
+        [Authorize(Policy = "RetriveStudentLists")]
         [HttpGet]
         [Route(Router.StudentRouteing.GetById)]
 
@@ -56,6 +57,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return NewResult(response);
         }
 
+        [Authorize(Policy = "AddStudent")]
         [HttpPost]
         [Route(Router.StudentRouteing.Create)]
 
@@ -72,7 +74,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return NewResult(response);
         }
 
-
+        [Authorize(Policy = "EditStudent")]
         [HttpPut]
         [Route(Router.StudentRouteing.Edit)]
 
@@ -88,6 +90,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return NewResult(response);
         }
 
+        [Authorize(Policy = "DeleteStudent")]
         [HttpDelete]
         [Route(Router.StudentRouteing.Delete)]
         [ProducesResponseType(StatusCodes.Status200OK)]

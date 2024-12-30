@@ -130,7 +130,13 @@ namespace CleanArchProject.Infrastracture
                     }
                 });
             });
-
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("AddStudent", policy => policy.RequireClaim("CreateStudent", "True"));
+                option.AddPolicy("DeleteStudent", policy => policy.RequireClaim("DeleteStudent", "True"));
+                option.AddPolicy("RetriveStudentLists", policy => policy.RequireClaim("RetriveStudentLists", "True"));
+                option.AddPolicy("EditStudent", policy => policy.RequireClaim("EditStudent", "True"));
+            });
             return services;
 
         }

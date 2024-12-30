@@ -101,7 +101,8 @@ namespace CleanArchProject.Service.ServicesImplementation
             foreach(var role in roles){
                 claims.Add(new Claim(ClaimTypes.Role, role));
             }
-
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            claims.AddRange(userClaims);
             return claims;
         }
 
