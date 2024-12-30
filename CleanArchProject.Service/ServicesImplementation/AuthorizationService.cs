@@ -100,13 +100,12 @@ namespace CleanArchProject.Service.ServicesImplementation
             var response = new ManageUserRolesResult();
             var Roles = new List<Roles>();
 
-            var userRoles = await _userManager.GetRolesAsync(user);
             var roles = await _roleManager.Roles.ToListAsync();
 
             foreach (var role in roles)
             {
                 var UserRole = new Roles { Id = role.Id, Name = role.Name };
-                UserRole.HasRole = userRoles.Contains(role.Name);
+                UserRole.HasRole = await _userManager.IsInRoleAsync(user, role.Name);
                 Roles.Add(UserRole);
             }
             response.UserId = user.Id;

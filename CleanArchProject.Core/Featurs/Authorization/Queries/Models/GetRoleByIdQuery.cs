@@ -11,6 +11,11 @@ namespace CleanArchProject.Core.Featurs.Authorization.Queries.Models
 {
     public class GetRoleByIdQuery : IRequest<Response<GetRoleResponse>>
     {
+        public GetRoleByIdQuery(int id)
+        {
+            Id = id;
+        }
+
         public int Id { get; set; }
     }
 }
