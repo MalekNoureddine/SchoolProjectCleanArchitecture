@@ -84,9 +84,9 @@ namespace CleanArchProject.Data.AppMetaData
             public const string Claims = Prefix + "/Claims";
             public const string Create = Roles + "/Create";
             public const string Edit = Roles + "/Edit";
-            public const string Delete = Roles + "/Delete/{id}";
+            public const string Delete = Roles + "/Delete/{Id}";
             public const string RolesList = Roles + "/Role-List";
-            public const string GetRoleById = Roles + "/Role-By-Id/{id}";
+            public const string GetRoleById = Roles + "/Role-By-Id/{Id}";
             public const string GetRoleByName = Roles + "/Role-By-Name/{Name}";
             public const string ManageUserRoles = Roles + "/Manage-User-Roles/{userId}";
             public const string UpdateUserRoles = Roles + "/Update-User-Roles";
