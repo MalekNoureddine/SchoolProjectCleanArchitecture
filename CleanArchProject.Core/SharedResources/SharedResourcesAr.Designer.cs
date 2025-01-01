@@ -133,6 +133,15 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الايميل غير مقبول.
+        /// </summary>
+        internal static string EmailNotValid {
+            get {
+                return ResourceManager.GetString("EmailNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to فشل عملية الاضافة.
         /// </summary>
         internal static string FaildToAdd {
@@ -336,6 +345,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string RoleIsInUse {
             get {
                 return ResourceManager.GetString("RoleIsInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to فشل في ارسال الايميل.
+        /// </summary>
+        internal static string SendEmailFailed {
+            get {
+                return ResourceManager.GetString("SendEmailFailed", resourceCulture);
             }
         }
         
