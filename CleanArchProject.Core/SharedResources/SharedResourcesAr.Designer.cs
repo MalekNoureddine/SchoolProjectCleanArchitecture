@@ -124,6 +124,24 @@ namespace CleanArchProject.Core.SharedResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فشل عملية تاكيد الايميل.
+        /// </summary>
+        internal static string EmailConfermationFaild {
+            get {
+                return ResourceManager.GetString("EmailConfermationFaild", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تم تاكيد الايميل بنجاح.
+        /// </summary>
+        internal static string EmailConfirmed {
+            get {
+                return ResourceManager.GetString("EmailConfirmed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الايميل غير مؤكد.
         /// </summary>
         internal static string EmailNotConfirmed {
@@ -399,6 +417,15 @@ namespace CleanArchProject.Core.SharedResources {
         internal static string TokenIsNotExpired {
             get {
                 return ResourceManager.GetString("TokenIsNotExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حاول مجددا.
+        /// </summary>
+        internal static string TryAgain {
+            get {
+                return ResourceManager.GetString("TryAgain", resourceCulture);
             }
         }
         

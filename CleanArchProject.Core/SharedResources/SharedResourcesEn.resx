@@ -225,4 +225,13 @@
   <data name="SendEmailFailed" xml:space="preserve">
     <value>Send email failed</value>
   </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>TryAgain</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>Email was confirmed successfully</value>
+  </data>
+  <data name="EmailConfermationFaild" xml:space="preserve">
+    <value>Email confermation faild</value>
+  </data>
 </root>

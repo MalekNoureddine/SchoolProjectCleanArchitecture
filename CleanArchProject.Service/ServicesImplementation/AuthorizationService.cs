@@ -39,7 +39,9 @@ namespace CleanArchProject.Service.ServicesImplementation
                 Name = roleName,
             };
             var response = await _roleManager.CreateAsync(role);
-            return response.Succeeded ? "Success" : "Failed" ;
+            if (response.Succeeded) return "Succeeded";
+            var errors = response.Errors.Select(x => x.Code).FirstOrDefault();
+            return errors;
         }
 
         public Task<bool> IsRoleExists(string roleName)
@@ -59,9 +61,7 @@ namespace CleanArchProject.Service.ServicesImplementation
             role.Name = editRoleRequest.Name;
             var result = await _roleManager.UpdateAsync(role);
             if (result.Succeeded) return "Succeeded";
-            var errors = string.Join(",", result.Errors);
-            if (errors == "Microsoft.AspNetCore.Identity.IdentityError")
-                return "IdentityError";
+            var errors =  result.Errors.Select(x => x.Code).FirstOrDefault();
             return errors;
         }
 

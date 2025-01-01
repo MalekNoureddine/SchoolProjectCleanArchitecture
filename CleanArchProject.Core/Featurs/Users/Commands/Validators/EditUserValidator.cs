@@ -57,6 +57,8 @@ namespace CleanArchProject.Core.Featurs.Users.Commands.Validators
             RuleFor(s => s.Email).MustAsync(async (module, key, cancellationToken) => await _userManager.Users.FirstOrDefaultAsync(x => x.Email == module.Email && x.Id != module.Id) == null)
                 .WithMessage(_localizer[SharedResourcesKeys.IsAlreadyExits]);
 
+            RuleFor(s => s.PhoneNumber).MustAsync(async (module, key, cancellationToken) => !await _userManager.Users.AnyAsync(x => x.PhoneNumber == module.PhoneNumber && x.Id != module.Id))
+                .WithMessage(_localizer[SharedResourcesKeys.IsAlreadyExits]);
 
         }
 

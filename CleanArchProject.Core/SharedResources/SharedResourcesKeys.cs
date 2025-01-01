@@ -20,6 +20,7 @@ namespace CleanArchProject.Core.SharedResources
         public const string UpdateFailed = "UpdateFailed";
         public const string Updated = "Updated";
         public const string FaildToAdd = "FaildToAdd";
+        public const string TryAgain = "TryAgain";
 
         public const string NotEmpty = "NotEmpty";
         public const string NotNull = "NotNull";
@@ -57,6 +58,8 @@ namespace CleanArchProject.Core.SharedResources
         public const string FailedToAddNewClaims = "FailedToAddNewClaims";
         public const string EmailNotValid = "EmailNotValid";
         public const string SendEmailFailed = "SendEmailFailed";
+        public const string EmailConfirmed = "EmailConfirmed";
+        public const string EmailConfermationFaild = "EmailConfermationFaild";
     }
     
 }

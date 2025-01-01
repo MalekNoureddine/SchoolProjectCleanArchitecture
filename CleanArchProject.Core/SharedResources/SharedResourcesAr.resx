@@ -249,4 +249,13 @@
   <data name="SendEmailFailed" xml:space="preserve">
     <value>فشل في ارسال الايميل</value>
   </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>حاول مجددا</value>
+  </data>
+  <data name="EmailConfirmed" xml:space="preserve">
+    <value>تم تاكيد الايميل بنجاح</value>
+  </data>
+  <data name="EmailConfermationFaild" xml:space="preserve">
+    <value>فشل عملية تاكيد الايميل</value>
+  </data>
 </root>

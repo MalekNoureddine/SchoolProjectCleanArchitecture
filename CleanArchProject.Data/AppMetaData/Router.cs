@@ -76,6 +76,7 @@ namespace CleanArchProject.Data.AppMetaData
             public const string SignIn = Prefix + "SignIn";
             public const string RefreshToken = Prefix + "Refresh-Token";
             public const string ValidateToken = Prefix + "Validate-Token";
+            public const string ConfirmEmail = "/Api/Authentication/ConfirmEmail";
         }
         public static class AuthorizationRouting
         {
