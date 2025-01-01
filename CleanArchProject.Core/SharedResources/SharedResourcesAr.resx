@@ -243,4 +243,10 @@
   <data name="FailedToAddNewClaims" xml:space="preserve">
     <value>فشل في اضافة صلاحيات استخدام جديدة</value>
   </data>
+  <data name="EmailNotValid" xml:space="preserve">
+    <value>الايميل غير مقبول</value>
+  </data>
+  <data name="SendEmailFailed" xml:space="preserve">
+    <value>فشل في ارسال الايميل</value>
+  </data>
 </root>
