@@ -215,6 +215,22 @@ namespace CleanArchProject.Service.ServicesImplementation
             var expirydate = userRefreshToken.ExpiryDate;
             return (userId, expirydate);
         }
+
+        public async Task<string> ConfirmEmail(int userId, string code)
+        {
+            if (code == null)
+                return "FailedToConfirmEmail";
+
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+                return "NotFound";
+
+            var confirmEmail = await _userManager.ConfirmEmailAsync(user, code);
+            if (!confirmEmail.Succeeded)
+                return "FailedToConfirmEmail";
+            return "Succeeded";
+        }
         #endregion
     }
 }

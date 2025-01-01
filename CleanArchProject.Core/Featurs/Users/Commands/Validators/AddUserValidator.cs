@@ -3,6 +3,7 @@ using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Data.Entities.Identities;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,8 @@ namespace CleanArchProject.Core.Featurs.Users.Commands.Validators
             RuleFor(s => s.Email).MustAsync(async (key, cancellationToken) => await _userManager.FindByEmailAsync(key) == null)
                 .WithMessage(_localizer[SharedResourcesKeys.IsAlreadyExits]);
 
+            RuleFor(s => s.PhoneNumber).MustAsync(async (key, cancellationToken) => !await _userManager.Users.AnyAsync(x=> x.PhoneNumber == key))
+                .WithMessage(_localizer[SharedResourcesKeys.IsAlreadyExits]);
 
         }
 

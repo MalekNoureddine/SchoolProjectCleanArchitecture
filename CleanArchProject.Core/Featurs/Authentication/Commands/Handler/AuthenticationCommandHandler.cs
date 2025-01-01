@@ -50,8 +50,8 @@ namespace CleanArchProject.Core.Featurs.Authentication.Commands.Handler
             //if Failed Return Passord is wrong
             if (!signInResult.Succeeded) return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.PasswordNotCorrect]);
             //confirm email
-            //if (!user.EmailConfirmed)
-            //    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.EmailNotConfirmed]);
+            if (!user.EmailConfirmed)
+                return BadRequest<JwtAuthResult>(_stringLocalizer[SharedResourcesKeys.EmailNotConfirmed]);
             //Generate Token
             var result = await _authenticationService.GetJWTToken(user);
             //return Token 

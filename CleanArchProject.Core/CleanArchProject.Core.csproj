@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Featurs\Authentication\Queries\Responses\**" />
+    <EmbeddedResource Remove="Featurs\Authentication\Queries\Responses\**" />
+    <None Remove="Featurs\Authentication\Queries\Responses\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="FluentValidation" Version="11.10.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
@@ -51,7 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Featurs\Authentication\Queries\Responses\" />
     <Folder Include="Featurs\Email\Queries\Modles\" />
     <Folder Include="Featurs\Email\Queries\Handler\" />
     <Folder Include="Featurs\Email\Queries\Responses\" />

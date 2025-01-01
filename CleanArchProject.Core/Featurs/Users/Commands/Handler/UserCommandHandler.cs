@@ -3,6 +3,7 @@ using CleanArchProject.Core.Bases;
 using CleanArchProject.Core.Featurs.Users.Commands.Models;
 using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Data.Entities.Identities;
+using CleanArchProject.Service.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -25,19 +26,19 @@ namespace CleanArchProject.Core.Featurs.Users.Commands.Handler
         private readonly IMapper _mapper;
         private readonly IStringLocalizer<SharedResources.SharedResources> _sharedResources;
         private readonly UserManager<User> _userManager;
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserService _userService;
         #endregion
 
         #region Constructors
         public UserCommandHandler(IStringLocalizer<SharedResources.SharedResources> stringLocalizer,
                                   IMapper mapper,
                                   UserManager<User> userManager,
-                                  IHttpContextAccessor httpContextAccessor) : base(stringLocalizer)
+                                  IUserService userService) : base(stringLocalizer)
         {
             _mapper = mapper;
             _sharedResources = stringLocalizer;
             _userManager = userManager;
-            _httpContextAccessor = httpContextAccessor;
+            _userService = userService;
         }
         #endregion
 
@@ -45,16 +46,15 @@ namespace CleanArchProject.Core.Featurs.Users.Commands.Handler
         public async Task<Response<string>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
             var identityUser = _mapper.Map<User>(request);
-
-            var result = await _userManager.CreateAsync(identityUser, request.Password);
-            
-            if (!result.Succeeded)
-                return  BadRequest<string>(string.Join(",", result.Errors.Select(x => x.Description).ToList()));
-       
-            
-            await _userManager.AddToRoleAsync(identityUser, "User");
-            
-            return Success("");
+            //Create
+            var createResult = await _userService.AddUserAsync(identityUser, request.Password);
+            switch (createResult)
+            {
+                case "ErrorInCreateUser": return BadRequest<string>(_sharedResources[SharedResourcesKeys.FaildToAdd]);
+                case "Failed": return BadRequest<string>(_sharedResources[SharedResourcesKeys.TryAgain]);
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(createResult);
+            }
         }
 
         public async Task<Response<string>> Handle(ChangeUserPasswordCommand request, CancellationToken cancellationToken)

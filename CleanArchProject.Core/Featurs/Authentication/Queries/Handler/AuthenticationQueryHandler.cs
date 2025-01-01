@@ -17,7 +17,8 @@ using System.Threading.Tasks;
 namespace CleanArchProject.Core.Featurs.Authentication.Queries.Handler
 {
     public class AuthenticationQueryHandler : ResponseHandler,
-        IRequestHandler<AuthorizeUserQuery, Response<string>>
+        IRequestHandler<AuthorizeUserQuery, Response<string>>,
+        IRequestHandler<ConfirmEmailQuery, Response<string>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources.SharedResources> _stringLocalizer;
@@ -37,6 +38,18 @@ namespace CleanArchProject.Core.Featurs.Authentication.Queries.Handler
         {
             var result = await _authenticationService.ValidateToken(request.AccessToken);
             return result == "IsActive" ? Success(result) : Unauthorized<string>(_stringLocalizer[SharedResourcesKeys.TokenIsExpired]);
+        }
+
+        public async Task<Response<string>> Handle(ConfirmEmailQuery request, CancellationToken cancellationToken)
+        {
+            var confirmEmail = await _authenticationService.ConfirmEmail(request.UserId, request.Code);
+            switch (confirmEmail)
+            {
+                case "NotFound": return NotFound<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
+                case "Succeeded": return Success<string>(_stringLocalizer[SharedResourcesKeys.EmailConfirmed]);
+                default:
+                    return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.EmailConfermationFaild]);
+            }
         }
         #endregion
     }

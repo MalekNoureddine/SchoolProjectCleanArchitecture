@@ -25,7 +25,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
-        public async Task<IActionResult> Create([FromForm] SignInCommand singInCommand)
+        public async Task<IActionResult> SignIn([FromForm] SignInCommand singInCommand)
         {
             var response = await _mediator.Send(singInCommand);
             return NewResult(response);
@@ -40,7 +40,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
-        public async Task<IActionResult> Create([FromForm] RefreshTokenCommand refreshTokenCommand)
+        public async Task<IActionResult> RefreshToken([FromForm] RefreshTokenCommand refreshTokenCommand)
         {
             var response = await _mediator.Send(refreshTokenCommand);
             return NewResult(response);
@@ -55,9 +55,24 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 
-        public async Task<IActionResult> Create([FromQuery] AuthorizeUserQuery authorizeUserQuery)
+        public async Task<IActionResult> ValidateToken([FromQuery] AuthorizeUserQuery authorizeUserQuery)
         {
             var response = await _mediator.Send(authorizeUserQuery);
+            return NewResult(response);
+        }
+
+        [HttpGet]
+        [Route(Router.AuthenticationRouting.ConfirmEmail)]
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+        public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailQuery confirmEmailQuery)
+        {
+            var response = await _mediator.Send(confirmEmailQuery);
             return NewResult(response);
         }
     }

@@ -40,7 +40,9 @@ IAuthorizationService authorizationService) : base(stringLocalizer)
         public async Task<Response<string>> Handle(AddRoleCommand request, CancellationToken cancellationToken)
         {
             var result = await _authorizationService.AddRole(request.RoleName);
-            return result == "Success" ? Success<string>("") : BadRequest<string>(_stringLocalizer[SharedResourcesKeys.FaildToAdd]);
+            if (result == "Succeeded") return Success("");
+            else if (result == "DuplicateRoleName") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.RoleAlreadyExists]);
+            else return BadRequest<string>(result);
         }
 
         public async Task<Response<string>> Handle(EditRoleCommand request, CancellationToken cancellationToken)
@@ -48,7 +50,7 @@ IAuthorizationService authorizationService) : base(stringLocalizer)
             var result = await _authorizationService.EditRole(request);
             if (result == "NotFound") return NotFound<string>();
             else if (result == "Succeeded") return Success<string>(_stringLocalizer[SharedResourcesKeys.Updated]);
-            else if (result == "IdentityError") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.RoleAlreadyExists]);
+            else if (result == "DuplicateRoleName") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.RoleAlreadyExists]);
             else return BadRequest<string>(result);
         }
 

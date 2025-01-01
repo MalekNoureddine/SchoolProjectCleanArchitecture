@@ -4,6 +4,9 @@ using CleanArchProject.Data.Healper;
 using CleanArchProject.Infrastracture.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -146,6 +149,15 @@ namespace CleanArchProject.Infrastracture
                 option.AddPolicy("RetriveStudentLists", policy => policy.RequireClaim("RetriveStudentLists", "True"));
                 option.AddPolicy("EditStudent", policy => policy.RequireClaim("EditStudent", "True"));
                 option.AddPolicy("SendingEmails", policy => policy.RequireClaim("SendingEmails", "True"));
+            });
+
+
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddTransient<IUrlHelper>(x =>
+            {
+                var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
+                var factory = x.GetRequiredService<IUrlHelperFactory>();
+                return factory.GetUrlHelper(actionContext);
             });
             return services;
 
