@@ -15,6 +15,7 @@ namespace CleanArchProject.Data.Healper
             new Claim("CreateStudent","false"),
             new Claim("EditStudent","false"),
             new Claim("DeleteStudent","false"),
+            new Claim("SendingEmails","false"),
         };
     }
 }

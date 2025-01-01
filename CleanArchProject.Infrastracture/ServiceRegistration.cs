@@ -79,6 +79,15 @@ namespace CleanArchProject.Infrastracture
             };
             services.AddSingleton(jwtSettings);
 
+            var emailSettings = new EmailSettings
+            {
+                Port = int.Parse(Environment.GetEnvironmentVariable("EMAIL_PORT")),
+                Host = Environment.GetEnvironmentVariable("EMAIL_HOST"),
+                FromEmail = Environment.GetEnvironmentVariable("EMAIL_FROMEMAIL"),
+                Password = Environment.GetEnvironmentVariable("EMAIL_PASSWORD")
+            };
+            services.AddSingleton(emailSettings);
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -136,6 +145,7 @@ namespace CleanArchProject.Infrastracture
                 option.AddPolicy("DeleteStudent", policy => policy.RequireClaim("DeleteStudent", "True"));
                 option.AddPolicy("RetriveStudentLists", policy => policy.RequireClaim("RetriveStudentLists", "True"));
                 option.AddPolicy("EditStudent", policy => policy.RequireClaim("EditStudent", "True"));
+                option.AddPolicy("SendingEmails", policy => policy.RequireClaim("SendingEmails", "True"));
             });
             return services;
 

@@ -94,6 +94,12 @@ namespace CleanArchProject.Data.AppMetaData
             public const string UpdateUserClaims = Claims + "/Update-User-Claims";
 
         }
+
+        public static class EmailsRoute
+        {
+            public const string Prefix = "Email/";
+            public const string SendEmail = Prefix + "SendEmail";
+        }
     }
 
 

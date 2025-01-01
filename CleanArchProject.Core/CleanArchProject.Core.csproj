@@ -52,6 +52,9 @@
 
   <ItemGroup>
     <Folder Include="Featurs\Authentication\Queries\Responses\" />
+    <Folder Include="Featurs\Email\Queries\Modles\" />
+    <Folder Include="Featurs\Email\Queries\Handler\" />
+    <Folder Include="Featurs\Email\Queries\Responses\" />
     <Folder Include="Featurs\Users\Queries\Handler\" />
     <Folder Include="Featurs\Users\Queries\Models\" />
     <Folder Include="Featurs\Users\Queries\Responses\" />
