@@ -20,6 +20,7 @@ namespace CleanArchProject.Infrastracture
             services.AddTransient<IStudentSubjectRepository, Student_SubjectRepository>();
 
             services.AddTransient<IUserRefreshTokenRepository, UserRefreshTokenRepository>();
+            services.AddTransient<IResetPasswordRepository, ResetPasswordRepository>();
 
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             return services;

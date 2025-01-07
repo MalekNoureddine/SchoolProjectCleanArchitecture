@@ -124,7 +124,7 @@ namespace CleanArchProject.Service.ServicesImplementation
         public IQueryable<Department> GetFilteredDepartmentsQuerable(enDepartmentOrderingEnum orderBy, string search)
         {
             var result = GetAllDepartmentsQuerable();
-            if (!search.IsNullOrEmpty())
+            if (!string.IsNullOrEmpty(search))
             {
                 result = result.Where(s => s.DName.Contains(search) || s.DNameAr.Contains(search) ||
                 s.Manager.ENameAr.Contains(search) ||

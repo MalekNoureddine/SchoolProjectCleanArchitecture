@@ -1,4 +1,5 @@
 ﻿using CleanArchProject.Data.Entities.Identies;
+using EntityFrameworkCore.EncryptColumn.Attribute;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace CleanArchProject.Data.Entities.Identities

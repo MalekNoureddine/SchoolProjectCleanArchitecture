@@ -1,23 +1,32 @@
 ﻿using Azure.Core;
+using CleanArchProject.Data.Entities;
 using CleanArchProject.Data.Entities.Identies;
 using CleanArchProject.Data.Entities.Identities;
 using CleanArchProject.Data.Healper;
 using CleanArchProject.Data.Results;
+using CleanArchProject.Infrastracture.Data;
 using CleanArchProject.Infrastracture.Interfaces;
 using CleanArchProject.Service.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace CleanArchProject.Service.ServicesImplementation
 {
@@ -27,15 +36,25 @@ namespace CleanArchProject.Service.ServicesImplementation
         private readonly JwtSettings _jwtSettings;
         private readonly UserManager<User> _userManager;
         private readonly IUserRefreshTokenRepository _userRefreshTokenRepository;
+        private readonly IMemoryCache _tokenCache;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IEmailService _emailsService;
+        private readonly IUrlHelper _urlHelper;
+        private readonly IResetPasswordRepository _resetPasswordRepo;
 
         #endregion
 
         #region Constructors
-        public AuthenticationService(JwtSettings jwtSettings, IUserRefreshTokenRepository userRefreshTokenRepository, UserManager<User> userManager)
+        public AuthenticationService(JwtSettings jwtSettings, IUserRefreshTokenRepository userRefreshTokenRepository, UserManager<User> userManager, IMemoryCache tokenCache, IHttpContextAccessor httpContextAccessor, IEmailService emailsService, IUrlHelper urlHelper, IResetPasswordRepository resetPasswordRepo)
         {
             _jwtSettings = jwtSettings;
             _userRefreshTokenRepository = userRefreshTokenRepository;
             _userManager = userManager;
+            _tokenCache = tokenCache;
+            _httpContextAccessor = httpContextAccessor;
+            _emailsService = emailsService;
+            _urlHelper = urlHelper;
+            _resetPasswordRepo = resetPasswordRepo;
         }
 
         #endregion
@@ -231,6 +250,81 @@ namespace CleanArchProject.Service.ServicesImplementation
                 return "FailedToConfirmEmail";
             return "Succeeded";
         }
+        public async Task<string> ForgotPassword(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return "NotFound";
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var hashedToken = HashToken(token);
+
+            var resetPasswordEntry = new ResetPassword
+            {
+                UserId = user.Id,
+                Token = hashedToken,
+                ExpirationDate = DateTime.UtcNow.AddHours(1)
+            };
+            await _resetPasswordRepo.AddAsync(resetPasswordEntry);
+
+            var resetLink = BuildResetLink(token);
+            var message = $"To reset your password, click the link: <a href='{resetLink}'>Reset Password</a>";
+            await _emailsService.SendEmail(user.Email, message, "Password Reset");
+
+            return "PasswordResetLinkSent";
+        }
+
+        public async Task<string> ResetPassword( string token, string newPassword)
+        {
+            var hashedToken = HashToken(token);
+            var resetPasswordEntry = await _resetPasswordRepo.GetTableNoTracking()
+                .FirstOrDefaultAsync(rp => rp.Token == hashedToken);
+
+            if (resetPasswordEntry == null || resetPasswordEntry.ExpirationDate < DateTime.UtcNow)
+            {
+                if (resetPasswordEntry != null)
+                    await _resetPasswordRepo.DeleteAsync(resetPasswordEntry);
+
+                return "InvalidOrExpiredToken";
+            }
+
+            var user = await _userManager.FindByIdAsync(resetPasswordEntry.UserId.ToString());
+            if (user == null) return "NotFound";
+
+            var result = await _userManager.ResetPasswordAsync(user, token, newPassword);
+            if (!result.Succeeded)
+                return $"Error: {string.Join(", ", result.Errors.Select(e => e.Description))}";
+
+            await _resetPasswordRepo.DeleteAsync(resetPasswordEntry);
+            return "PasswordResetSuccess";
+        }
+        #endregion
+
+        #region HealperFunctions
+
+        private string BuildResetLink(string token)
+        {
+            var encodedToken = WebUtility.UrlEncode(token);
+            var request = _httpContextAccessor.HttpContext.Request;
+            return $"{request.Scheme}://{request.Host}/Authentication/ResetPassword?token={encodedToken}";
+        }
+        private string HashToken(string token)
+        {
+            var encryptionKey = Environment.GetEnvironmentVariable("ENCRYPTION_KEY") ?? throw new ArgumentNullException();
+            using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(encryptionKey)))
+            {
+                var bytes = Encoding.UTF8.GetBytes(token);
+                var hash = hmac.ComputeHash(bytes);
+                return Convert.ToBase64String(hash);
+            }
+        }
+
+        //private bool VerifyHashedToken(string hashedToken, string plainToken)
+        //{
+        //    var plainTokenHash = HashToken(plainToken);
+        //    return CryptographicOperations.FixedTimeEquals(
+        //        Encoding.UTF8.GetBytes(hashedToken),
+        //        Encoding.UTF8.GetBytes(plainTokenHash));
+        //}
         #endregion
     }
 }

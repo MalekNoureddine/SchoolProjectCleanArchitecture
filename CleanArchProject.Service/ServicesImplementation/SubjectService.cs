@@ -104,7 +104,7 @@ namespace CleanArchProject.Service.ServicesImplementation
         public IQueryable<Subjects> GetFilteredSubjectsQuerable(enSubjectsOrderingEnum orderBy, string search)
         {
             var result = GetAllSubjectsQuerable();
-            if (!search.IsNullOrEmpty())
+            if (!string.IsNullOrEmpty(search))
             {
                 result = result.Where(s => s.SubjectName.Contains(search) || s.SubjectNameAr.Contains(search));
             }

@@ -4,6 +4,7 @@ using CleanArchProject.Infrastracture.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchProject.Infrastracture.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250105001438_reset-userTable")]
+    partial class resetuserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,26 +279,6 @@ namespace CleanArchProject.Infrastracture.Migrations
                     b.HasIndex("SupervisorId");
 
                     b.ToTable("Instructors", (string)null);
-                });
-
-            modelBuilder.Entity("CleanArchProject.Data.Entities.ResetPassword", b =>
-                {
-                    b.Property<string>("Token")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("ExpirationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Token");
-
-                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Token"));
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ResetPasswords", (string)null);
                 });
 
             modelBuilder.Entity("CleanArchProject.Data.Entities.Student", b =>
@@ -566,15 +549,6 @@ namespace CleanArchProject.Infrastracture.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Supervisor");
-                });
-
-            modelBuilder.Entity("CleanArchProject.Data.Entities.ResetPassword", b =>
-                {
-                    b.HasOne("CleanArchProject.Data.Entities.Identities.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("CleanArchProject.Data.Entities.Student", b =>

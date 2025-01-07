@@ -75,5 +75,35 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             var response = await _mediator.Send(confirmEmailQuery);
             return NewResult(response);
         }
+
+        [HttpGet]
+        [Route(Router.AuthenticationRouting.ForgotPassword)]
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+        public async Task<IActionResult> ForgotPassword([FromRoute] string Email)
+        {
+            var response = await _mediator.Send(new ForgotPasswordQuery { Email = Email});
+            return NewResult(response);
+        }
+
+        [HttpGet]
+        [Route(Router.AuthenticationRouting.ResetPassword)]
+
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
+        public async Task<IActionResult> ResetPassword([FromQuery] ResetPasswordCommand resetPasswordCommand)
+        {
+            var response = await _mediator.Send(resetPasswordCommand);
+            return NewResult(response);
+        }
     }
 }
