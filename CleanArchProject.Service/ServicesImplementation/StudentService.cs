@@ -42,7 +42,7 @@ namespace CleanArchProject.Service.ServicesImplementation
         public IQueryable<Student> GetFilteredStudentsQuerable(enStudentOrderingEnum orderBy, string search)
         {  
             var result = _studentService.GetTableNoTracking().Include(s => s.Department).AsQueryable();
-            if (!search.IsNullOrEmpty())
+            if (!string.IsNullOrEmpty(search))
             {
                 result = result.Where(s =>s.Name.Contains(search) || s.Department.DName.Contains(search) || s.Address.Contains(search));
             }

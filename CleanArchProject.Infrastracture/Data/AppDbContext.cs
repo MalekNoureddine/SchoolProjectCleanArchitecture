@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using CleanArchProject.Data.Entities.Identies;
+using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
+using EntityFrameworkCore.EncryptColumn.Extension;
+using System.Reflection;
 
 
 namespace CleanArchProject.Infrastracture.Data
@@ -19,7 +23,6 @@ namespace CleanArchProject.Infrastracture.Data
                 
         }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) {
-
         }
 
         public DbSet<Department> Department { get; set; }
@@ -32,10 +35,11 @@ namespace CleanArchProject.Infrastracture.Data
         public DbSet<Subj_Instructor> Subj_Instructors { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
+        public DbSet<ResetPassword> ResetPasswords { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);           
         }
     }
 }

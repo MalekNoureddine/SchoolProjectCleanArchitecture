@@ -19,7 +19,8 @@ namespace CleanArchProject.Core.Featurs.Authentication.Commands.Handler
 {
     public class AuthenticationCommandHandler : ResponseHandler,
         IRequestHandler<SignInCommand, Response<JwtAuthResult>>,
-        IRequestHandler<RefreshTokenCommand, Response<JwtAuthResult>>
+        IRequestHandler<RefreshTokenCommand, Response<JwtAuthResult>>,
+        IRequestHandler<ResetPasswordCommand, Response<string>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources.SharedResources> _stringLocalizer;
@@ -76,6 +77,27 @@ namespace CleanArchProject.Core.Featurs.Authentication.Commands.Handler
             var response = await _authenticationService.GetRefreshToken(user,jwtToken,expiryDate, request.RefreshToken);
             return Success(response);
         }
+
+        public async Task<Response<string>> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.ResetPassword(request.Token, request.NewPassword);
+
+            switch (result)
+            {
+                case "NotFound":
+                    return NotFound<string>("User not found.");
+                case "TokenExpired":
+                    return BadRequest<string>("The password reset token has expired.");
+                case "PasswordResetSuccess":
+                    return Success("Password has been successfully reset.");
+                case "Error":
+                    return InternalServerError<string>();
+                default:
+                    return InternalServerError<string>();
+            }
+        }
+
+
         #endregion
     }
 }

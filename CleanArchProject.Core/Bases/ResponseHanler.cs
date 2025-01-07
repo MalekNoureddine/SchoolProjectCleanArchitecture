@@ -24,7 +24,7 @@ namespace CleanArchProject.Core.Bases
             {
                 StatusCode = System.Net.HttpStatusCode.OK,
                 Succeeded = true,
-                Message = message.IsNullOrEmpty()? _stringLocalizer[SharedResourcesKeys.Deleted] : message
+                Message = string.IsNullOrEmpty(message)? _stringLocalizer[SharedResourcesKeys.Deleted] : message
             };
         }
         public Response<T> InternalServerError<T>()

@@ -17,6 +17,7 @@ namespace CleanArchProject.Service.Interfaces
         public Task<string> ValidateToken(string accessToken);
         public Task<string> ConfirmEmail(int userId, string code);
         public JwtSecurityToken ReadJwtToken(string accessToken);
-
+        public Task<string> ForgotPassword(string Email);
+        public Task<string> ResetPassword(string token, string newPassword);
     }
 }

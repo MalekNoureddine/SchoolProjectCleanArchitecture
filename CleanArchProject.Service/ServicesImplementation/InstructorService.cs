@@ -107,7 +107,7 @@ namespace CleanArchProject.Service.ServicesImplementation
         public IQueryable<Instructor> GetFilteredInstructorsQuerable(enInstructorsOrderingEnum orderBy, string search)
         {
             var result = GetAllInstructorsQuerable();
-            if (!search.IsNullOrEmpty())
+            if (!string.IsNullOrEmpty(search))
             {
                 result = result.Where(s => s.EName.Contains(search) || s.ENameAr.Contains(search) ||
                  s.Phone.Contains(search) || s.Email.Contains(search) ||
