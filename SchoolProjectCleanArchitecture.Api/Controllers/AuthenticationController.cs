@@ -61,7 +61,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return NewResult(response);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route(Router.AuthenticationRouting.ConfirmEmail)]
 
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -76,7 +76,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return NewResult(response);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route(Router.AuthenticationRouting.ForgotPassword)]
 
         [ProducesResponseType(StatusCodes.Status404NotFound)]
