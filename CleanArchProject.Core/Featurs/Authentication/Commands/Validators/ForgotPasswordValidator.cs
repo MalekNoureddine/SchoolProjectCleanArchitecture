@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CleanArchProject.Core.Featurs.Authentication.Commands.Validators
 {
-    public class ForgotPasswordValidator : AbstractValidator<ForgotPasswordQuery>
+    public class ForgotPasswordValidator : AbstractValidator<ForgotPasswordCommand>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources.SharedResources> _localizer;

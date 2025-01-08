@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanArchProject.Core.Featurs.Authentication.Queries.Models
+namespace CleanArchProject.Core.Featurs.Authentication.Commands.Models
 {
-    public class ForgotPasswordQuery: IRequest<Response<string>>
+    public class ForgotPasswordCommand : IRequest<Response<string>>
     {
         public string Email { get; set; }
     }

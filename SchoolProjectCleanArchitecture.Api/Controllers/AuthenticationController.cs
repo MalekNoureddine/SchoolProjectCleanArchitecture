@@ -87,7 +87,7 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
 
         public async Task<IActionResult> ForgotPassword([FromRoute] string Email)
         {
-            var response = await _mediator.Send(new ForgotPasswordQuery { Email = Email});
+            var response = await _mediator.Send(new ForgotPasswordCommand { Email = Email});
             return NewResult(response);
         }
 

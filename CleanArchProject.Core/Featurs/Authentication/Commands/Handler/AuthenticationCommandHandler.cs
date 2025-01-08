@@ -20,7 +20,8 @@ namespace CleanArchProject.Core.Featurs.Authentication.Commands.Handler
     public class AuthenticationCommandHandler : ResponseHandler,
         IRequestHandler<SignInCommand, Response<JwtAuthResult>>,
         IRequestHandler<RefreshTokenCommand, Response<JwtAuthResult>>,
-        IRequestHandler<ResetPasswordCommand, Response<string>>
+        IRequestHandler<ResetPasswordCommand, Response<string>>,
+        IRequestHandler<ForgotPasswordCommand, Response<string>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources.SharedResources> _stringLocalizer;
@@ -94,6 +95,18 @@ namespace CleanArchProject.Core.Featurs.Authentication.Commands.Handler
                     return InternalServerError<string>();
                 default:
                     return InternalServerError<string>();
+            }
+        }
+
+        public async Task<Response<string>> Handle(ForgotPasswordCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.ForgotPassword(request.Email);
+            switch (result)
+            {
+                case "NotFound": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserNotFound]);
+                case "PasswordResetLinkSent": return Success("");
+                default:
+                    return BadRequest<string>("");
             }
         }
 
