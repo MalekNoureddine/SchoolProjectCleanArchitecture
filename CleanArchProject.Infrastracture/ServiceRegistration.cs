@@ -39,8 +39,6 @@ namespace CleanArchProject.Infrastracture
             });
 
             
-            services.AddMemoryCache();
-
             services.AddIdentity<User, Role>(options =>
             {
                 // Password settings.

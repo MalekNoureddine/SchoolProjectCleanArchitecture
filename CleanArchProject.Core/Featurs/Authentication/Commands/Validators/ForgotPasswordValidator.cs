@@ -1,4 +1,4 @@
-﻿using CleanArchProject.Core.Featurs.Authentication.Queries.Models;
+﻿using CleanArchProject.Core.Featurs.Authentication.Commands.Models;
 using CleanArchProject.Core.SharedResources;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanArchProject.Core.Featurs.Authentication.Queries.Validators
+namespace CleanArchProject.Core.Featurs.Authentication.Commands.Validators
 {
     public class ForgotPasswordValidator : AbstractValidator<ForgotPasswordQuery>
     {
@@ -28,7 +28,7 @@ namespace CleanArchProject.Core.Featurs.Authentication.Queries.Validators
         public void ApplyValidationsRules()
         {
 
-            RuleFor(x => x. Email)
+            RuleFor(x => x.Email)
                  .NotEmpty().WithMessage(_localizer[SharedResourcesKeys.NotEmpty])
                  .NotNull().WithMessage(_localizer[SharedResourcesKeys.Required]).EmailAddress();
 

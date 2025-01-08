@@ -36,24 +36,20 @@ namespace CleanArchProject.Service.ServicesImplementation
         private readonly JwtSettings _jwtSettings;
         private readonly UserManager<User> _userManager;
         private readonly IUserRefreshTokenRepository _userRefreshTokenRepository;
-        private readonly IMemoryCache _tokenCache;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IEmailService _emailsService;
-        private readonly IUrlHelper _urlHelper;
         private readonly IResetPasswordRepository _resetPasswordRepo;
 
         #endregion
 
         #region Constructors
-        public AuthenticationService(JwtSettings jwtSettings, IUserRefreshTokenRepository userRefreshTokenRepository, UserManager<User> userManager, IMemoryCache tokenCache, IHttpContextAccessor httpContextAccessor, IEmailService emailsService, IUrlHelper urlHelper, IResetPasswordRepository resetPasswordRepo)
+        public AuthenticationService(JwtSettings jwtSettings, IUserRefreshTokenRepository userRefreshTokenRepository, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, IEmailService emailsService, IResetPasswordRepository resetPasswordRepo)
         {
             _jwtSettings = jwtSettings;
             _userRefreshTokenRepository = userRefreshTokenRepository;
             _userManager = userManager;
-            _tokenCache = tokenCache;
             _httpContextAccessor = httpContextAccessor;
             _emailsService = emailsService;
-            _urlHelper = urlHelper;
             _resetPasswordRepo = resetPasswordRepo;
         }
 
