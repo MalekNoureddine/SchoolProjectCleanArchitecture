@@ -82,17 +82,17 @@ dotnet run
   - One-to-Many
   - Many-to-Many
 - **Authentication & Security:**
- - JSON Web Tokens (JWT) for secure authentication.
- - Role-based authorization for Admins and Teachers.
+  - JSON Web Tokens (JWT) for secure authentication.
+  - Role-based authorization for Admins and Teachers.
 - **Validation:**
-- Input validation using Fluent Validation.
+  - Input validation using Fluent Validation.
 - **CQRS with MediatR:**
- - **Commands:** Handle data mutations (e.g., create, update, delete).
- - **Queries:** Handle read operations.
+  - **Commands:** Handle data mutations (e.g., create, update, delete).
+  - **Queries:** Handle read operations.
 - **Best Practices:**
-- Separation of concerns for better maintainability.
-- Mapping layers for data transformations.
-- Follwing design prencipals 
+  - Separation of concerns for better maintainability.
+  - Mapping layers for data transformations.
+  - Follwing design prencipals 
 ## 🔧 Tools and Packages
 - **MediatR:** Request handling.
 - **Entity Framework Core:** Database management and ORM.
