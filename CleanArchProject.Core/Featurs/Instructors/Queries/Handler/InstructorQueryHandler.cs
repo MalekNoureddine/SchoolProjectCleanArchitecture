@@ -2,11 +2,14 @@
 using CleanArchProject.Core.Bases;
 using CleanArchProject.Core.Featurs.Departments.Queries.Response;
 using CleanArchProject.Core.Featurs.Instructors.Queries.Models;
+using CleanArchProject.Core.Featurs.Instructors.Queries.Models.View;
 using CleanArchProject.Core.Featurs.Instructors.Queries.Response;
+using CleanArchProject.Core.Featurs.Instructors.Queries.Response.View;
 using CleanArchProject.Core.Featurs.Students.Queries.Models;
 using CleanArchProject.Core.Featurs.Students.Queries.Response;
 using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Data.Entities;
+using CleanArchProject.Data.Entities.Views;
 using CleanArchProject.Service.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Localization;
@@ -23,7 +26,10 @@ namespace CleanArchProject.Core.Featurs.Instructors.Queries.Handler
     public class InstructorQueryHandler : ResponseHandler,
         IRequestHandler<GetInstructorsListQuery, Response<List<GetInstructorsListResponse>>>,
         IRequestHandler<GetInstructorByIdQuery, Response<GetInstructorByIdResponse>>,
-        IRequestHandler<GetPaginatedInstructorsListQuery, PaginatedResult<GetPaginatedInstructorsListResponse>>
+        IRequestHandler<GetPaginatedInstructorsListQuery, PaginatedResult<GetPaginatedInstructorsListResponse>>,
+        IRequestHandler<GetInstructorViewByIdQuery, Response<InstructorViewResponse>>,
+        IRequestHandler<GetInstructorsViewsListQuery, Response<List<InstructorViewResponse>>>,
+        IRequestHandler<GetInstructorViewsPaginatedList, PaginatedResult<InstructorViewResponse>>
     {
         #region Fields
         private readonly IInstructorService _instructorService;
@@ -85,6 +91,39 @@ namespace CleanArchProject.Core.Featurs.Instructors.Queries.Handler
             var paginatedList = await FilteredQuerable.Select(expression).ToPaginatedListAsync(request.InstructorsPageNumber, request.InstructorsPageSize);
             paginatedList.Meta = new { Count = paginatedList.Data.Count };
             return paginatedList;
+        }
+
+        public async Task<Response<InstructorViewResponse>> Handle(GetInstructorViewByIdQuery request, CancellationToken cancellationToken)
+        {
+            var instructor = await _instructorService.GetInstructorViewByIdAsync(request.InstructorId);
+            if (instructor == null) return NotFound<InstructorViewResponse>(_stringLocalizer[SharedResourcesKeys.NotFound]);
+
+            var instructormapper = _mapper.Map<InstructorViewResponse>(instructor);
+            return Success(instructormapper);
+        }
+
+        public async Task<Response<List<InstructorViewResponse>>> Handle(GetInstructorsViewsListQuery request, CancellationToken cancellationToken)
+        {
+            var instructor = await _instructorService.GetInstructorsViewListAsync();
+
+            var departmentsMapper = _mapper.Map<List<InstructorViewResponse>>(instructor);
+            var result = Success(departmentsMapper);
+
+            return result;
+        }
+
+        public async Task<PaginatedResult<InstructorViewResponse>> Handle(GetInstructorViewsPaginatedList request, CancellationToken cancellationToken)
+        {
+
+            Expression<Func<InstructorsView, InstructorViewResponse>> expression = i =>
+            new InstructorViewResponse(i.InstructorId, i.Name
+            , i.Email, i.Position, i.SupervisorName);
+
+            var FilteredQuerable = _instructorService.GetFilteredInstructorsViewQuerable(request.OrderBy, request.Search ?? "");
+            var paginatedList = await FilteredQuerable.Select(expression).ToPaginatedListAsync(request.InstructorsPageNumber, request.InstructorsPageSize);
+            paginatedList.Meta = new { Count = paginatedList.Data.Count };
+            return paginatedList;
+
         }
 
         #endregion

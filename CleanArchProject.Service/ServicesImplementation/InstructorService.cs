@@ -1,6 +1,8 @@
 ﻿using CleanArchProject.Data.Entities;
+using CleanArchProject.Data.Entities.Views;
 using CleanArchProject.Data.Enums;
 using CleanArchProject.Infrastracture.Interfaces;
+using CleanArchProject.Infrastracture.Interfaces.Views;
 using CleanArchProject.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,12 +18,14 @@ namespace CleanArchProject.Service.ServicesImplementation
     {
         #region Fields
         private readonly IInstructorRepository _instructorService;
+        private readonly IViewRepository<InstructorsView> _instructorsViewService;
         #endregion
 
         #region Constructors
-        public InstructorService(IInstructorRepository instructor)
+        public InstructorService(IInstructorRepository instructor, IViewRepository<InstructorsView> instructorsViewService)
         {
             _instructorService = instructor;
+            _instructorsViewService = instructorsViewService;
         }
         #endregion
 
@@ -201,6 +205,44 @@ namespace CleanArchProject.Service.ServicesImplementation
         public async Task<bool> IsInstructorExists(int Id)
         {
             return await _instructorService.GetTableNoTracking().AnyAsync(i => i.InsId == Id);
+        }
+
+        public async Task<InstructorsView> GetInstructorViewByIdAsync(int id)
+        {
+            var instructorViewResult = await _instructorsViewService.GetByIdAsync(id);
+            return instructorViewResult;
+        }
+
+        public async Task<List<InstructorsView>> GetInstructorsViewListAsync()
+        {
+            var instructorViewListResult = await _instructorsViewService.GetTableNoTracking().ToListAsync();
+            return instructorViewListResult;
+        }
+
+        public IQueryable<InstructorsView> GetFilteredInstructorsViewQuerable(enInstructorViewOrderingEnum orderBy, string search)
+        {
+            var result = _instructorsViewService.GetTableNoTracking().AsQueryable();
+            if (!string.IsNullOrEmpty(search))
+            {
+                result = result.Where(s => s.Name.Contains(search) || s.Email.Contains(search) ||
+                 s.SupervisorName.Contains(search));
+            }
+            switch (orderBy)
+            {
+                case enInstructorViewOrderingEnum.InsId:
+                    result = result.OrderBy(s => s.InstructorId);
+                    break;
+                case enInstructorViewOrderingEnum.EName:
+                    result = result.OrderBy(s => s.Name);
+                    break;
+                case enInstructorViewOrderingEnum.Email:
+                    result = result.OrderBy(s => s.Email);
+                    break;
+                default:
+                    result = result.OrderBy(s => s.InstructorId);
+                    break;
+            }
+            return result;
         }
         #endregion
 

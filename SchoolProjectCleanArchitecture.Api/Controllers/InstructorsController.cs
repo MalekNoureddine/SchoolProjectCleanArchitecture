@@ -2,9 +2,11 @@
 using CleanArchProject.Core.Featurs.Departments.Queries.Models;
 using CleanArchProject.Core.Featurs.Instructors.Commands.Models;
 using CleanArchProject.Core.Featurs.Instructors.Queries.Models;
+using CleanArchProject.Core.Featurs.Instructors.Queries.Models.View;
 using CleanArchProject.Core.Filters;
 using CleanArchProject.Data.AppMetaData;
 using CleanArchProject.Data.Entities;
+using CleanArchProject.Data.Entities.Views;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -36,12 +38,35 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
             return NewResult(response);
         }
 
+        [HttpGet(Router.InstructorRouting.ViewList)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<InstructorsView>> GetAllInstructorsView()
+        {
+            var response = await _mediator.Send(new GetInstructorsViewsListQuery());
+            return NewResult(response);
+        }
+
         [HttpGet(Router.InstructorRouting.Paginated)]
 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Instructor>> GetPaginatedInstructors([FromQuery] GetPaginatedInstructorsListQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return Ok(response);
+        }
+
+        [HttpGet(Router.InstructorRouting.PaginatedView)]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<InstructorsView>> GetPaginatedInstructorsView([FromQuery] GetInstructorViewsPaginatedList query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);
@@ -55,6 +80,19 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Instructor>> GetInstructorById([FromQuery] GetInstructorByIdQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return NewResult(response);
+        }
+
+        [HttpGet]
+        [Route(Router.InstructorRouting.GetViewById)]
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Instructor>> GetInstructorViewById([FromQuery] GetInstructorViewByIdQuery query)
         {
             var response = await _mediator.Send(query);
             return NewResult(response);

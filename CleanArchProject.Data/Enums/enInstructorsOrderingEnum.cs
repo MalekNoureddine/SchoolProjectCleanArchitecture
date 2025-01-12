@@ -16,4 +16,10 @@ namespace CleanArchProject.Data.Enums
         NumberOfSubjects
         
     }
+    public enum enInstructorViewOrderingEnum
+    {
+        InsId = 0,
+        EName,
+        Email,
+    }
 }

@@ -39,8 +39,11 @@ namespace CleanArchProject.Data.AppMetaData
         {
             public const string Prefix = "Instructors/";
             public const string All = Prefix + "All";
+            public const string ViewList = Prefix + "ViewList";
             public const string Paginated = Prefix + "Paginated";
+            public const string PaginatedView = Prefix + "PaginatedView";
             public const string GetById = Prefix + "Id";
+            public const string GetViewById = Prefix + "GetViewById";
             public const string Create = Prefix + "Create";
             public const string Edit = Prefix + "Edit";
             public const string Delete = Prefix + "Delete/" + "{Id}";
