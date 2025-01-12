@@ -2,6 +2,7 @@
 using CleanArchProject.Core.Featurs.Departments.Queries.Models;
 using CleanArchProject.Core.Featurs.Instructors.Commands.Models;
 using CleanArchProject.Core.Featurs.Instructors.Queries.Models;
+using CleanArchProject.Core.Filters;
 using CleanArchProject.Data.AppMetaData;
 using CleanArchProject.Data.Entities;
 using MediatR;
@@ -22,9 +23,12 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
     {
         public InstructorsController(IMediator mediator) : base(mediator){}
 
+        [ServiceFilter(typeof(AuthFilter))]
         [HttpGet(Router.InstructorRouting.All)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Instructor>> GetAllInstructors()
         {
