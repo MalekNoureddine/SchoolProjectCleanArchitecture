@@ -1,6 +1,9 @@
-﻿using CleanArchProject.Infrastracture.InfrastractureBases__generics_;
+﻿using CleanArchProject.Data.Entities.Views;
+using CleanArchProject.Infrastracture.InfrastractureBases__generics_;
 using CleanArchProject.Infrastracture.Interfaces;
+using CleanArchProject.Infrastracture.Interfaces.Views;
 using CleanArchProject.Infrastracture.Repositories;
+using CleanArchProject.Infrastracture.Repositories.Views;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchProject.Infrastracture
@@ -21,6 +24,8 @@ namespace CleanArchProject.Infrastracture
 
             services.AddTransient<IUserRefreshTokenRepository, UserRefreshTokenRepository>();
             services.AddTransient<IResetPasswordRepository, ResetPasswordRepository>();
+
+            services.AddTransient<IViewRepository<InstructorsView>, InstructorViewRepository>();
 
             services.AddTransient(typeof(IGenericRepositoryAsync<>), typeof(GenericRepositoryAsync<>));
             return services;

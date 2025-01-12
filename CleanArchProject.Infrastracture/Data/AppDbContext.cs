@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CleanArchProject.Data.Entities.Identies;
+using CleanArchProject.Data.Entities.Views;
 
 
 
@@ -28,6 +29,11 @@ namespace CleanArchProject.Infrastracture.Data
         public DbSet<User> User { get; set; }
         public DbSet<UserRefreshToken> UserRefreshToken { get; set; }
         public DbSet<ResetPassword> ResetPasswords { get; set; }
+
+        #region Views
+        public DbSet<InstructorsView> InstructorsViews { get; set; }
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

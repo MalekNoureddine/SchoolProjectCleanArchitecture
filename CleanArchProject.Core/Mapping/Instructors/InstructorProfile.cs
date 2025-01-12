@@ -15,6 +15,7 @@ namespace CleanArchProject.Core.Mapping.Instructors
             GetInstructorsListMapping();
             EditInstructorMapping();
             AddInstructorMapping();
+            InstructorViewQueryResponseMapping();
         }
     }
 }

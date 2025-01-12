@@ -1,4 +1,5 @@
 ﻿using CleanArchProject.Data.Entities;
+using CleanArchProject.Data.Entities.Views;
 using CleanArchProject.Data.Enums;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace CleanArchProject.Service.Interfaces
     {
         public Task<List<Instructor>> GetAllInstructorsAsync(bool includeEntities = false);
         public Task<Instructor> GetInstructorByIdAsync(int id, bool includeEntities = false);
+        public Task<InstructorsView> GetInstructorViewByIdAsync(int id);
+        public Task<List<InstructorsView>> GetInstructorsViewListAsync();
         public Task<string> AddInstructorAsync(Instructor instructor);
         public Task<string> EditInstructorAsync(Instructor instructor);
         public Task<bool> IsInstructorPhoneExists(string Phone);
@@ -21,6 +24,7 @@ namespace CleanArchProject.Service.Interfaces
         Task<string> DeleteInstructorAsync(Instructor instructor);
         public IQueryable<Instructor> GetAllInstructorsQuerable();
         IQueryable<Instructor> GetFilteredInstructorsQuerable(enInstructorsOrderingEnum orderBy, string search);
+        IQueryable<InstructorsView> GetFilteredInstructorsViewQuerable(enInstructorViewOrderingEnum orderBy, string search);
         IQueryable<Instructor> GetInstructorsListBySupervisorIdQuerable(int id);
         Task<bool> IsInstructorExists(int Id);
     }
