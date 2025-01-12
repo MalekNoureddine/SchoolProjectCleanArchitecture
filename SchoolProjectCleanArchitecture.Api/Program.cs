@@ -1,4 +1,5 @@
 using CleanArchProject.Core;
+using CleanArchProject.Core.Filters;
 using CleanArchProject.Core.MiddleWares;
 using CleanArchProject.Data.Entities.Identies;
 using CleanArchProject.Data.Entities.Identities;
@@ -73,6 +74,8 @@ builder.Services.AddCors(options => options.AddPolicy(name: _cors, policy =>
     policy.AllowAnyOrigin();
 }));
 #endregion
+
+builder.Services.AddTransient<AuthFilter>();
 var app = builder.Build();
 
 #region DataSeeding
