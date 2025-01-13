@@ -15,6 +15,7 @@ namespace CleanArchProject.Core.Mapping.Departments
             GetDepartmentByIdMapping();
             AddDepartmentMapping();
             EditDepartmentMapping();
+            GetDepartmentStudentCountProcMapping();
         }
     }
 }

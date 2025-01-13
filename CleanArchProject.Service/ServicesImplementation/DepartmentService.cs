@@ -1,6 +1,8 @@
 ﻿using CleanArchProject.Data.Entities;
+using CleanArchProject.Data.Entities.Procedures;
 using CleanArchProject.Data.Enums;
 using CleanArchProject.Infrastracture.Interfaces;
+using CleanArchProject.Infrastracture.Interfaces.Procedures;
 using CleanArchProject.Service.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -18,12 +20,14 @@ namespace CleanArchProject.Service.ServicesImplementation
     {
         #region Fields
         private readonly IDepartmentRepository _departmentService;
+        private readonly IDepartmentStudentCountProcRepository _departmentProcService;
         #endregion
 
         #region Constructors
-        public DepartmentService(IDepartmentRepository department)
+        public DepartmentService(IDepartmentRepository department, IDepartmentStudentCountProcRepository departmentProcService)
         {
             _departmentService = department;
+            _departmentProcService = departmentProcService;
         }
         #endregion
 
@@ -190,6 +194,12 @@ namespace CleanArchProject.Service.ServicesImplementation
                 .Where(s => (s.DNameAr.Equals(DepartmentArabicName)) && s.DID != Id).FirstOrDefaultAsync();
             if (checkDepartmentName != null) return true;
             return false;
+        }
+
+        public async Task<IReadOnlyList<DepartmentStudentCountProc>> GetDepartmentStudentCountProcs()
+        {
+            var res = await _departmentProcService.GetDepartmentStudentCountProcs();
+            return res;
         }
         #endregion
 
