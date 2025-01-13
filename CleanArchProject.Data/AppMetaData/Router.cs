@@ -27,6 +27,7 @@ namespace CleanArchProject.Data.AppMetaData
         {
             public const string Prefix = "Departments/";
             public const string All = Prefix + "All";
+            public const string WithStudentCount = Prefix + "WithStudentCount";
             public const string Paginated = Prefix + "Paginated";
             public const string GetById = Prefix + "Id";
             public const string Create = Prefix + "Create";

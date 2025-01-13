@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CleanArchProject.Data.Entities.Identies;
 using CleanArchProject.Data.Entities.Views;
+using CleanArchProject.Data.Entities.Procedures;
 
 
 
@@ -34,6 +35,9 @@ namespace CleanArchProject.Infrastracture.Data
         public DbSet<InstructorsView> InstructorsViews { get; set; }
         #endregion
 
+        #region Stored Procedures
+        public DbSet<DepartmentStudentCountProc> DepartmentStudentCountProc { get; set; }
+        #endregion
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

@@ -2,11 +2,13 @@
 using CleanArchProject.Core.Bases;
 using CleanArchProject.Core.Featurs.Departments.Queries.Models;
 using CleanArchProject.Core.Featurs.Departments.Queries.Response;
+using CleanArchProject.Core.Featurs.Departments.Queries.Responses;
 using CleanArchProject.Core.Featurs.Students.Queries.Response;
 using CleanArchProject.Core.SharedResources;
 using CleanArchProject.Data.Entities;
 using CleanArchProject.Service.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Wrappers;
 using System;
@@ -21,7 +23,8 @@ namespace CleanArchProject.Core.Featurs.Departments.Queries.Handler
     public class DepartmentQueryHandler : ResponseHandler,
         IRequestHandler<GetADepartmentQuery,Response<GetDepartmentByIdResponse>>,
         IRequestHandler<GetAllDepartmentsQuery, Response<List<GetAllDepartmentResponse>>>,
-        IRequestHandler<GetPaginatedDepartmentsListQuery,PaginatedResult<GetPagenatedDepartmentsResponse>>
+        IRequestHandler<GetPaginatedDepartmentsListQuery,PaginatedResult<GetPagenatedDepartmentsResponse>>,
+        IRequestHandler<GetDepartmentStudentCountProcQuery,Response<IReadOnlyList<GetDepartmentStudentCountProcResponse>>>
     {
         #region Fields
         private readonly IDepartmentService _department;
@@ -90,5 +93,11 @@ namespace CleanArchProject.Core.Featurs.Departments.Queries.Handler
             return paginatedList;
         }
 
+        public async Task<Response<IReadOnlyList<GetDepartmentStudentCountProcResponse>>> Handle(GetDepartmentStudentCountProcQuery request, CancellationToken cancellationToken)
+        {
+            var departments =  await _department.GetDepartmentStudentCountProcs();
+            var departmentsMapper = _mapper.Map<IReadOnlyList<GetDepartmentStudentCountProcResponse>>(departments);
+            return Success(departmentsMapper);
+        }
     }
 }

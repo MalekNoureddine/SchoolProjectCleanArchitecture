@@ -4,6 +4,7 @@ using CleanArchProject.Core.Featurs.Students.Commands.Models;
 using CleanArchProject.Core.Featurs.Students.Queries.Models;
 using CleanArchProject.Data.AppMetaData;
 using CleanArchProject.Data.Entities;
+using CleanArchProject.Data.Entities.Procedures;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,12 @@ namespace SchoolProjectCleanArchitecture.Api.Controllers
         {
             var response = await _mediator.Send(new GetAllDepartmentsQuery());
             return NewResult(response);
+        }
+
+        [HttpGet(Router.DepartmentRouting.WithStudentCount)]
+        public async Task<ActionResult<DepartmentStudentCountProc>> GetDepartmentStudentsCount()
+        {
+            return NewResult(await _mediator.Send(new GetDepartmentStudentCountProcQuery()));
         }
 
         [HttpGet(Router.DepartmentRouting.Paginated)]

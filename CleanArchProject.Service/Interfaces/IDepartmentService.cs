@@ -1,4 +1,5 @@
 ﻿using CleanArchProject.Data.Entities;
+using CleanArchProject.Data.Entities.Procedures;
 using CleanArchProject.Data.Enums;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,8 @@ namespace CleanArchProject.Service.Interfaces
         Task<string> DeleteDepartmentAsync(Department department);
         public IQueryable<Department> GetAllDepartmentsQuerable();
         IQueryable<Department> GetFilteredDepartmentsQuerable(enDepartmentOrderingEnum orderBy, string search);
+
+        public Task<IReadOnlyList<DepartmentStudentCountProc>> GetDepartmentStudentCountProcs();
+
     }
 }
